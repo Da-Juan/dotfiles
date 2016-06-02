@@ -1,0 +1,3 @@
+#!/bin/sh
+dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop
+i3lock -d -I 30 -u -t -i $1
