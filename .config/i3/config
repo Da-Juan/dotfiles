@@ -100,15 +100,17 @@ set $wallpaper /home/nrouanet/Pictures/wallpaper.png
 bindsym $mod+Shift+x exec /home/nrouanet/.config/i3/scripts/lockscreen $wallpaper
 
 set $workspace1 "1 "
-set $workspace2 "2 "
-set $workspace3 "3 "
-set $workspace4 "4"
+set $workspace2 "2"
+set $workspace3 "3 "
+set $workspace4 "4 "
 set $workspace5 "5"
 set $workspace6 "6"
 set $workspace7 "7"
 set $workspace8 "8"
-set $workspace9 "9 "
-set $workspace10 "10 "
+set $workspace9 "9"
+set $workspace10 "10"
+set $workspace11 "11 "
+set $workspace12 "12 "
 
 # switch to workspace
 bindsym $mod+ampersand workspace $workspace1
@@ -121,6 +123,8 @@ bindsym $mod+egrave workspace $workspace7
 bindsym $mod+underscore workspace $workspace8
 bindsym $mod+ccedilla workspace $workspace9
 bindsym $mod+agrave workspace $workspace10
+bindsym $mod+parenright workspace $workspace11
+bindsym $mod+equal workspace $workspace12
 
 # move focused container to workspace
 bindsym $mod+Shift+ampersand move container to workspace $workspace1
@@ -133,10 +137,13 @@ bindsym $mod+Shift+egrave move container to workspace $workspace7
 bindsym $mod+Shift+underscore move container to workspace $workspace8
 bindsym $mod+Shift+ccedilla move container to workspace $workspace9
 bindsym $mod+Shift+agrave move container to workspace $workspace10
+bindsym $mod+Shift+parenright move container to workspace $workspace11
+bindsym $mod+Shift+equal move container to workspace $workspace12
 
 # floating
 for_window [class="Skype"] floating enable
 for_window [class="Thunar"] floating enable
+for_window [class="Pavucontrol"] floating enable
 
 # hack for spotify
 for_window [class="Spotify"] move to workspace $workspace10
@@ -149,15 +156,17 @@ assign [class="Firefox"] $workspace2
 
 # workspace default monitors
 workspace $workspace1 output HDMI1
-workspace $workspace2 output HDMI2
+workspace $workspace2 output HDMI1
 workspace $workspace3 output HDMI2
-workspace $workspace4 output HDMI1
-workspace $workspace5 output HDMI1
-workspace $workspace6 output HDMI1
-workspace $workspace7 output HDMI1
-workspace $workspace8 output HDMI2
-workspace $workspace9 output HDMI2
-workspace $workspace10 output HDMI2
+workspace $workspace4 output HDMI2
+#workspace $workspace5 output HDMI1
+#workspace $workspace6 output HDMI1
+#workspace $workspace7 output HDMI1
+#workspace $workspace8 output HDMI2
+#workspace $workspace9 output HDMI2
+#workspace $workspace10 output HDMI2
+workspace $workspace11 output HDMI2
+workspace $workspace12 output HDMI2
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
