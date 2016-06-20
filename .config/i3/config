@@ -146,13 +146,13 @@ for_window [class="Thunar"] floating enable
 for_window [class="Pavucontrol"] floating enable
 
 # hack for spotify
-for_window [class="Spotify"] move to workspace $workspace10
+for_window [class="Spotify"] move to workspace $workspace12
 
 # default workspaces
-assign [class="Spotify"] $workspace10
-assign [class="Skype"] $workspace9
-assign [class="chromium-browser"] $workspace3
-assign [class="Firefox"] $workspace2
+assign [class="Spotify"] $workspace12
+assign [class="Skype"] $workspace11
+assign [class="chromium-browser"] $workspace4
+assign [class="Firefox"] $workspace3
 
 # workspace default monitors
 workspace $workspace1 output HDMI1
