@@ -14,3 +14,15 @@ set laststatus=2
 
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
 set t_Co=256
+
+""""""""""""""""""""
+" Highlight search "
+""""""""""""""""""""
+" Press F4 to toggle highlighting on/off, and show current value.
+:noremap <F4> :set hlsearch! hlsearch?<CR>
+
+" Press Return to temporarily get out of the highlighted search.
+:nnoremap <CR> :nohlsearch<CR><CR>
+
+" Pressing F8 will highlight all occurrences of the current word.
+:nnoremap <F8> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
