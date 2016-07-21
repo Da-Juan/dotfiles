@@ -10,7 +10,7 @@ Alex Booker dotfiles: https://github.com/alexbooker/dotfiles/tree/ubuntu
 
 Packages needed:
 ```
-apt-get install i3-wm i3blocks i3lock rofi compton thunar pavucontrol
+apt-get install i3-wm i3blocks i3lock rofi compton thunar pavucontrol terminator
 ```
 
 Font Awesome: http://fontawesome.io/  
