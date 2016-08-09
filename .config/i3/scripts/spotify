@@ -26,4 +26,12 @@ SPOTIFY_METADATA="$(dbus-send                                                 \
 TrackArtist=$(echo "$SPOTIFY_METADATA" | sed -n 's/artist|//p')
 TrackTitle=$(echo "$SPOTIFY_METADATA" | sed -n 's/title|//p')
 
-echo "$TrackArtist - $TrackTitle"
+dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.freedesktop.DBus.Properties.Get string:'org.mpris.MediaPlayer2.Player' string:'PlaybackStatus' | grep Playing > /dev/null
+if [ $? -eq 0 ]; then
+	PlaybackStatus=""
+else
+	PlaybackStatus=""
+fi
+
+
+echo "$PlaybackStatus $TrackArtist - $TrackTitle"
