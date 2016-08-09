@@ -144,6 +144,7 @@ bindsym $mod+Shift+equal move container to workspace $workspace12
 for_window [class="Skype"] floating enable
 for_window [class="Thunar"] floating enable
 for_window [class="Pavucontrol"] floating enable
+for_window [class="Eog"] floating enable
 
 # hack for spotify
 for_window [class="Spotify"] move to workspace $workspace12
@@ -247,3 +248,5 @@ exec --no-startup-id spotify
 
 exec --no-startup-id numlockx
 exec --no-startup-id compton
+
+bindsym $mod+F1 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
