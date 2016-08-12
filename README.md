@@ -23,3 +23,10 @@ Packages needed:
 ```
 apt-get install fonts-powerline python3-powerline powerline vim.nox
 ```
+
+## Random wallpapers
+Put some images in `~/Pictures/Wallpapers`
+Add this line to your crontab:
+```
+*/5 * * * *     DISPLAY=:0.0 ~/.config/i3/scripts/wallpaper
+```
