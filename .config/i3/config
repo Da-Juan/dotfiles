@@ -156,18 +156,18 @@ assign [class="chromium-browser"] $workspace4
 assign [class="Firefox"] $workspace3
 
 # workspace default monitors
-workspace $workspace1 output HDMI1
-workspace $workspace2 output HDMI1
-workspace $workspace3 output HDMI2
-workspace $workspace4 output HDMI2
+workspace $workspace1 output HDMI2
+workspace $workspace2 output HDMI2
+workspace $workspace3 output HDMI1
+workspace $workspace4 output HDMI1
 #workspace $workspace5 output HDMI1
 #workspace $workspace6 output HDMI1
 #workspace $workspace7 output HDMI1
 #workspace $workspace8 output HDMI2
 #workspace $workspace9 output HDMI2
 #workspace $workspace10 output HDMI2
-workspace $workspace11 output HDMI2
-workspace $workspace12 output HDMI2
+workspace $workspace11 output DP1
+workspace $workspace12 output DP1
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -240,7 +240,7 @@ bindsym $mod+space exec rofi -show run -lines 3 -eh 2 -width 100 -padding 450 -o
 
 # startup
 exec_always --no-startup-id feh --bg-scale $wallpaper
-exec_always --no-startup-id xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off --output DP1 --off
+exec_always --no-startup-id xrandr --output HDMI2 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI1 --mode 1920x1080 --pos 1920x0 --rotate normal --output VIRTUAL1 --off --output DP1 --mode 1920x1080 --pos 3840x0 --rotate normal
 exec --no-startup-id firefox
 #exec --no-startup-id chromium-browser
 #exec --no-startup-id skype
