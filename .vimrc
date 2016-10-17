@@ -1,9 +1,21 @@
-syntax on
-set nocompatible
-filetype plugin indent on
-au FileType py set autoindent
-au FileType py set smartindent
+" Pathogen load
+filetype off
 
+call pathogen#infect()
+call pathogen#helptags()
+
+syntax on
+"set nocompatible
+filetype plugin indent on
+"au FileType py set autoindent
+"au FileType py set smartindent
+
+" Use 256 colours (Use this setting only if your terminal supports 256 colours)
+set t_Co=256
+
+" Solarized colorscheme
+let g:solarized_termtrans=1 " 1|0 background transparent
+colorscheme solarized
 set background=dark
 
 python3 from powerline.vim import setup as powerline_setup
@@ -12,9 +24,6 @@ python3 del powerline_setup
 
 " Always show statusline
 set laststatus=2
-
-" Use 256 colours (Use this setting only if your terminal supports 256 colours)
-set t_Co=256
 
 " Toggle auto-indenting for code paste
 set pastetoggle=<F2>

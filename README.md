@@ -18,10 +18,23 @@ Octicons: https://octicons.github.com/
 Pomicons: https://github.com/gabrielelana/pomicons  
 Yosemite San Francisco Font: https://github.com/supermarin/YosemiteSanFranciscoFont  
 
-## Vim powerline
+## Vim
+### Vim powerline
 Packages needed:
 ```
 apt-get install fonts-powerline python3-powerline powerline vim.nox
+```
+### Pathogen
+https://github.com/tpope/vim-pathogen
+```
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+```
+### Python-mode
+https://github.com/klen/python-mode
+```
+cd ~/.vim/bundle
+git clone https://github.com/klen/python-mode.git
 ```
 
 ## Random wallpapers
