@@ -34,4 +34,4 @@ else
 fi
 
 
-echo "$PlaybackStatus $TrackArtist - $TrackTitle"
+echo "$TrackArtist - $TrackTitle $PlaybackStatus"
