@@ -18,6 +18,12 @@ Octicons: https://octicons.github.com/
 Pomicons: https://github.com/gabrielelana/pomicons  
 Yosemite San Francisco Font: https://github.com/supermarin/YosemiteSanFranciscoFont  
 
+**Memo**: get the version number of a font
+```
+apt-get  install lcdf-typetools
+otfinfo -v .fonts/fontawesome-webfont.ttf 
+```
+
 ## Vim
 ### Vim powerline
 Packages needed:
