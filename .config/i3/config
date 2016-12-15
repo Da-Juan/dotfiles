@@ -76,6 +76,7 @@ bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+f fullscreen toggle global
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -99,18 +100,18 @@ set $wallpaper ~/Pictures/Wallpapers/infinity-N3-HacTao.png
 # lock
 bindsym $mod+Shift+x exec ~/.config/i3/scripts/lockscreen $wallpaper
 
-set $workspace1 "1 "
-set $workspace2 "2 "
-set $workspace3 "3 "
-set $workspace4 "4 "
+set $workspace1 "1 "
+set $workspace2 "2"
+set $workspace3 "3 "
+set $workspace4 "4 "
 set $workspace5 "5"
 set $workspace6 "6"
 set $workspace7 "7"
 set $workspace8 "8"
 set $workspace9 "9"
 set $workspace10 "10"
-set $workspace11 "11 "
-set $workspace12 "12 "
+set $workspace11 "11 "
+set $workspace12 "12 "
 
 # switch to workspace
 bindsym $mod+ampersand workspace $workspace1
@@ -147,13 +148,12 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="Eog"] floating enable
 
 # hack for spotify
-for_window [class="Spotify"] move to workspace $workspace12
+for_window [class="Spotify"] move to workspace $workspace11
 
 # default workspaces
-assign [class="Spotify"] $workspace12
-assign [class="Skype"] $workspace11
-assign [class="chromium-browser"] $workspace4
-assign [class="Firefox"] $workspace3
+assign [class="Spotify"] $workspace11
+assign [class="chromium-browser"] $workspace12
+assign [class="Firefox"] $workspace1
 
 # workspace default monitors
 workspace $workspace1 output HDMI2
@@ -243,7 +243,6 @@ exec_always --no-startup-id feh --bg-scale $wallpaper
 exec_always --no-startup-id xrandr --output HDMI2 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI1 --mode 1920x1080 --pos 1920x0 --rotate normal --output VIRTUAL1 --off --output DP1 --mode 1920x1080 --pos 3840x0 --rotate normal
 exec --no-startup-id firefox
 #exec --no-startup-id chromium-browser
-#exec --no-startup-id skype
 exec --no-startup-id spotify
 
 exec --no-startup-id numlockx
