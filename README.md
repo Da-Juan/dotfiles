@@ -28,7 +28,7 @@ otfinfo -v .fonts/fontawesome-webfont.ttf
 ### Vim powerline
 Packages needed:
 ```
-apt-get install fonts-powerline python3-powerline powerline vim.nox
+apt-get install fonts-powerline python3-powerline powerline vim-nox
 ```
 ### Pathogen
 https://github.com/tpope/vim-pathogen
