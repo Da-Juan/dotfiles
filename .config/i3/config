@@ -152,7 +152,7 @@ for_window [class="Spotify"] move to workspace $workspace11
 
 # default workspaces
 assign [class="Spotify"] $workspace11
-assign [class="chromium-browser"] $workspace12
+assign [class="Chromium-browser"] $workspace12
 assign [class="Firefox"] $workspace1
 
 # workspace default monitors
