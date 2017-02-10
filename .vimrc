@@ -50,3 +50,13 @@ set foldlevel=99
 " Enable folding with the spacebar
 nnoremap <space> za
 vnoremap <space> zf
+
+" Pyton 120 characters line length
+let g:pymode_options_max_line_length=120
+autocmd FileType python set colorcolumn=120
+
+" If you prefer the Omni-Completion tip window to close when a selection is
+" made, these lines close it on movement in insert mode or when leaving
+" insert mode
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
