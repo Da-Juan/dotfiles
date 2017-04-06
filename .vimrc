@@ -60,3 +60,7 @@ autocmd FileType python set colorcolumn=120
 " insert mode
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" Enable modelines
+set modeline
+set modelines=5
