@@ -4,20 +4,53 @@ filetype off
 call pathogen#infect()
 call pathogen#helptags()
 
-syntax on
 "set nocompatible
 filetype plugin indent on
 "au FileType py set autoindent
 "au FileType py set smartindent
 
-" Use 256 colours (Use this setting only if your terminal supports 256 colours)
-set t_Co=256
+""""""""""""""""""""
+" General settings "
+""""""""""""""""""""
+syntax on			" Highlight syntax
+
+set number			" show line numbers
+
+set cursorline			" shows line under the cursor's line
+set showmatch			" shows matching part of bracket pairs (), [], {}
+
+set enc=utf-8			" utf-8 by default
+
+set pastetoggle=<F2>		" Toggle auto-indenting for code paste
+
+set modeline			" Enable modelines
+set modelines=5
+
+set scrolloff=10		" let 10 lines before/after cursor during scroll
+
+set exrc			" enable usage of additional .vimrc files from working directory
+set secure			" prohibit .vimrc files to execute shell, create files, etc...
+
+"""""""""""""""
+" Color theme "
+"""""""""""""""
+set t_Co=256			" Use 256 colours (Use this setting only if your terminal supports 256 colours)
 
 " Solarized colorscheme
-let g:solarized_termtrans=1 " 1|0 background transparent
+let g:solarized_termtrans=1 	" 1|0 background transparent
 colorscheme solarized
 set background=dark
 
+""""""""""""""""""""
+" Buffers settings "
+""""""""""""""""""""
+set switchbuf=useopen
+nmap <F9> :bprev<CR>
+nmap <F10> :bnext<CR>
+
+"""""""""""""
+" Powerline "
+"""""""""""""
 python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
 python3 del powerline_setup
@@ -25,12 +58,11 @@ python3 del powerline_setup
 " Always show statusline
 set laststatus=2
 
-" Toggle auto-indenting for code paste
-set pastetoggle=<F2>
+"""""""""""""""""""
+" Search settings "
+"""""""""""""""""""
+set incsearch			" Incremental search
 
-""""""""""""""""""""
-" Highlight search "
-""""""""""""""""""""
 " Press F4 to toggle highlighting on/off, and show current value.
 noremap <F4> :set hlsearch! hlsearch?<CR>
 
@@ -51,6 +83,9 @@ set foldlevel=99
 nnoremap <space> za
 vnoremap <space> zf
 
+"""""""""""""""
+" Python mode "
+"""""""""""""""
 " Pyton 120 characters line length
 let g:pymode_options_max_line_length=120
 autocmd FileType python set colorcolumn=120
@@ -60,7 +95,3 @@ autocmd FileType python set colorcolumn=120
 " insert mode
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-
-" Enable modelines
-set modeline
-set modelines=5
