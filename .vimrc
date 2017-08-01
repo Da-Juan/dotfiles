@@ -62,6 +62,7 @@ set laststatus=2
 " Search settings "
 """""""""""""""""""
 set incsearch			" Incremental search
+set hlsearch			" Highlight search
 
 " Press F4 to toggle highlighting on/off, and show current value.
 noremap <F4> :set hlsearch! hlsearch?<CR>
