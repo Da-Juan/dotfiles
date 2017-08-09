@@ -42,6 +42,9 @@ https://github.com/klen/python-mode
 cd ~/.vim/bundle
 git clone https://github.com/klen/python-mode.git
 ```
+### Syntax highlighting
+* Jinja: https://github.com/Glench/Vim-Jinja2-Syntax
+* SaltStack: https://github.com/saltstack/salt-vim
 
 ## Random wallpapers
 Put some images in `~/Pictures/Wallpapers`
