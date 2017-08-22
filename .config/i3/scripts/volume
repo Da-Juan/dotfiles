@@ -1,4 +1,4 @@
 #!/bin/bash
 sink=$(pactl list sinks | grep '^Sink #')
 
-/home/nrouanet/.config/i3/scripts/volume2 ${sink##*\#}
+~/.config/i3/scripts/volume2 ${sink##*\#}
