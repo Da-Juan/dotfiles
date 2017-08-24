@@ -1,4 +1,18 @@
 #!/bin/bash
 sink=$(pactl list sinks | grep '^Sink #')
 
-~/.config/i3/scripts/volume2 ${sink##*\#}
+if [ -z "$1" ]; then
+	/home/nrouanet/.config/i3/scripts/volume2 ${sink##*\#}
+else
+	case "$1" in
+		"up")
+			pactl set-sink-volume ${sink##*\#} +1%
+			;;
+		"down")
+			pactl set-sink-volume ${sink##*\#} -1%
+			;;
+		"mute")
+			pactl set-sink-mute ${sink##*\#} toggle
+			;;
+	esac
+fi
