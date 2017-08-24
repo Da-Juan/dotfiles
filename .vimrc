@@ -87,7 +87,7 @@ vnoremap <space> zf
 """""""""""""""
 " Python mode "
 """""""""""""""
-" Pyton 120 characters line length
+" Python 120 characters line length
 let g:pymode_options_max_line_length=120
 autocmd FileType python set colorcolumn=120
 
@@ -96,3 +96,6 @@ autocmd FileType python set colorcolumn=120
 " insert mode
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" Disable docstring preview on auto-completion for Python
+autocmd FileType python set completeopt=menu
