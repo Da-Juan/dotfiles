@@ -2,7 +2,15 @@
 sink=$(pactl list sinks | grep '^Sink #')
 
 if [ -z "$1" ]; then
-	/home/nrouanet/.config/i3/scripts/volume2 ${sink##*\#}
+	if [[ ${BLOCK_BUTTON:-0} == 1 ]]; then
+		$0 mute
+	fi
+	mute=$(pactl list sinks | grep Mute | sed 's/\sMute: \(.*\)/\1/')
+	if [[ $mute == yes ]]; then
+		echo " Mute"
+	else
+		echo " "$(~/.config/i3/scripts/volume2 ${sink##*\#})
+	fi
 else
 	case "$1" in
 		"up")
