@@ -22,6 +22,9 @@ apt-get  install lcdf-typetools
 otfinfo -v .fonts/fontawesome-webfont.ttf 
 ```
 
+## xcwd
+X current working directory: https://github.com/schischi/xcwd
+
 ## Vim
 ### Vim powerline
 Packages needed:
