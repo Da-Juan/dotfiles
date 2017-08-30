@@ -1,8 +1,6 @@
 # dotfiles
 Backup for my dotfiles
 
-**This is a work in progress**
-
 ## i3wm
 i3wm: https://i3wm.org/  
 i3wm screencast tutorials: https://www.youtube.com/watch?v=j1I63wGcvU4&list=PL5ze0DjYv5DbCv9vNEzFmP6sU7ZmkGzcf  
