@@ -51,5 +51,5 @@ git clone https://github.com/klen/python-mode.git
 Put some images in `~/Pictures/Wallpapers`
 Add this line to your crontab:
 ```
-*/5 * * * *     DISPLAY=:0.0 ~/.config/i3/scripts/wallpaper
+*/5 * * * *     ps -C i3 > /dev/null && DISPLAY=:0.0 ~/.config/i3/scripts/wallpaper || true
 ```
