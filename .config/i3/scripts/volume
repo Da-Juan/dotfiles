@@ -9,18 +9,18 @@ if [ -z "$1" ]; then
 	if [[ $mute == yes ]]; then
 		echo " Mute"
 	else
-		echo " "$(~/.config/i3/scripts/volume2 ${sink##*\#})
+		echo " $(~/.config/i3/scripts/volume2 "${sink##*\#}")"
 	fi
 else
 	case "$1" in
 		"up")
-			pactl set-sink-volume ${sink##*\#} +1%
+			pactl set-sink-volume "${sink##*\#}" +1%
 			;;
 		"down")
-			pactl set-sink-volume ${sink##*\#} -1%
+			pactl set-sink-volume "${sink##*\#}" -1%
 			;;
 		"mute")
-			pactl set-sink-mute ${sink##*\#} toggle
+			pactl set-sink-mute "${sink##*\#}" toggle
 			;;
 	esac
 fi

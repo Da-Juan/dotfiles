@@ -2,4 +2,4 @@
 files=(~/Pictures/Wallpapers/*)
 WALLPAPER=$(printf "%s\n" "${files[RANDOM % ${#files[@]}]}")
 WALLPAPER2=$(printf "%s\n" "${files[RANDOM % ${#files[@]}]}")
-feh -B black --bg-fill $WALLPAPER --bg-fill $WALLPAPER2
+feh -B black --bg-fill "$WALLPAPER" --bg-fill "$WALLPAPER2"
