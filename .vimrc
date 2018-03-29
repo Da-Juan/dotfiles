@@ -18,7 +18,7 @@ set number			" show line numbers
 
 				" toggle line numbering
 nnoremap <F3> :set nonumber!<CR>
-inoremap <F3> <ESC> :set nonumber!<CR>i
+imap <F3> <C-O><F3>
 
 set cursorline			" shows line under the cursor's line
 set showmatch			" shows matching part of bracket pairs (), [], {}
