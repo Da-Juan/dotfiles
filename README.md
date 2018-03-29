@@ -1,6 +1,28 @@
 # dotfiles
 Backup for my dotfiles
 
+```
+git clone --recurse-submodules https://github.com/Da-Juan/dotfiles.git
+```
+
+## zsh
+Oh my zsh: http://ohmyz.sh/
+
+Plugins:  
+zsh-autosuggestions: https://github.com/zsh-users/zsh-autosuggestions
+zsh-syntax-highlighting: https://github.com/zsh-users/zsh-syntax-highlighting
+zsh_virsh_autocompletion: https://github.com/jplitza/zsh-virsh-autocomplete
+
+Packages needed:
+```
+apt-get install zsh
+```
+
+If you want to hide the first element of the prompt (`user@host`) add the following line to you \.profile`:
+```
+export DEFAULT_USER=$USER
+```
+
 ## i3wm
 i3wm: https://i3wm.org/  
 i3wm screencast tutorials: https://www.youtube.com/watch?v=j1I63wGcvU4&list=PL5ze0DjYv5DbCv9vNEzFmP6sU7ZmkGzcf  
