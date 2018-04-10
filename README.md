@@ -30,13 +30,15 @@ Alex Booker dotfiles: https://github.com/alexbooker/dotfiles/tree/ubuntu
 
 Packages needed:
 ```
-apt-get install i3-wm i3blocks i3lock rofi compton thunar pavucontrol terminator dunst
+apt-get install i3-wm i3blocks i3lock rofi compton thunar arc-theme lxappearance moka-icon-theme faba-icon-theme pavucontrol terminator dunst feh numlockx
 ```
 
-Font Awesome: http://fontawesome.io/  
-Octicons: https://octicons.github.com/  
-Pomicons: https://github.com/gabrielelana/pomicons  
-Yosemite San Francisco Font: https://github.com/supermarin/YosemiteSanFranciscoFont  
+Set Ark Darker theme and Moka icons theme using `lxappearance`
+
+Font Awesome: http://fontawesome.io/
+Octicons: https://octicons.github.com/
+Pomicons: https://github.com/gabrielelana/pomicons
+Yosemite San Francisco Font: https://github.com/supermarin/YosemiteSanFranciscoFont
 
 **Memo**: get the version number of a font
 ```
@@ -45,6 +47,12 @@ otfinfo -v .fonts/fontawesome-webfont.ttf
 ```
 
 ## xcwd
+
+Packages needed:
+```
+apt-get install gcc libx11-dev make
+```
+
 X current working directory: https://github.com/schischi/xcwd
 
 ## Vim
@@ -63,7 +71,7 @@ curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 https://github.com/klen/python-mode
 ```
 cd ~/.vim/bundle
-git clone https://github.com/klen/python-mode.git
+git clone --recursive https://github.com/python-mode/python-mode
 ```
 ### Syntax highlighting
 * Jinja: https://github.com/Glench/Vim-Jinja2-Syntax
@@ -74,4 +82,10 @@ Put some images in `~/Pictures/Wallpapers`
 Add this line to your crontab:
 ```
 */5 * * * *     ps -C i3 > /dev/null && DISPLAY=:0.0 ~/.config/i3/scripts/wallpaper || true
+```
+
+## Useful tools
+
+```
+apt-get install htop tig
 ```
