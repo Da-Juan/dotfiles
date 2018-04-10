@@ -96,7 +96,7 @@ bindsym $mod+q focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-set $wallpaper ~/Pictures/Wallpapers/infinity-N3-HacTao.png
+set $wallpaper ~/Pictures/Wallpapers/wallpaper.png
 
 # lock
 bindsym $mod+Shift+x exec ~/.config/i3/scripts/lockscreen $wallpaper
