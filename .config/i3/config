@@ -154,6 +154,9 @@ for_window [class="Skype"] floating enable
 # Thunar(file manager)
 for_window [class="Thunar"] floating enable
 
+# Fix Remmina windows size
+for_window [class="Remmina"] resize set 1280 720
+for_window [class="Remmina" title="Remmina Remote Desktop Client"] resize set 480 640
 # Hack for spotify
 for_window [class="Spotify"] move to workspace $workspace12
 
