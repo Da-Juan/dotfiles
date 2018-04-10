@@ -101,9 +101,9 @@ set $wallpaper ~/Pictures/Wallpapers/wallpaper.png
 # lock
 bindsym $mod+Shift+x exec ~/.config/i3/scripts/lockscreen $wallpaper
 
-set $workspace1 "1 "
-set $workspace2 "2"
-set $workspace3 "3 "
+set $workspace1 "1 "
+set $workspace2 "2 "
+set $workspace3 "3 "
 set $workspace4 "4 "
 set $workspace5 "5"
 set $workspace6 "6"
@@ -111,8 +111,8 @@ set $workspace7 "7"
 set $workspace8 "8"
 set $workspace9 "9"
 set $workspace10 "10"
-set $workspace11 "11 "
-set $workspace12 "12 "
+set $workspace11 "11"
+set $workspace12 "12 "
 
 # switch to workspace
 bindsym $mod+ampersand workspace $workspace1
@@ -148,13 +148,14 @@ for_window [class="Thunar"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Eog"] floating enable
 
-# hack for spotify
-for_window [class="Spotify"] move to workspace $workspace11
+# Hack for spotify
+for_window [class="Spotify"] move to workspace $workspace12
 
 # default workspaces
-assign [class="Spotify"] $workspace11
-assign [class="Chromium-browser"] $workspace12
-assign [class="Firefox"] $workspace1
+assign [class="Thunderbird"] $workspace1
+assign [class="Chromium-browser"] $workspace2
+assign [class="Firefox"] $workspace3
+assign [class="Spotify"] $workspace12
 
 # workspace default monitors
 workspace $workspace1 output HDMI2
