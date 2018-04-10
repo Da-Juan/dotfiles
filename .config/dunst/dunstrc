@@ -1,5 +1,5 @@
 [global]
-    font = Monospace 8
+    font = Monospace 9
 
     # Possible values are:
     # full: Allow a small subset of html markup in notifications:
