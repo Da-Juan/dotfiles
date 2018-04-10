@@ -142,11 +142,17 @@ bindsym $mod+Shift+agrave move container to workspace $workspace10
 bindsym $mod+Shift+parenright move container to workspace $workspace11
 bindsym $mod+Shift+equal move container to workspace $workspace12
 
-# floating
-for_window [class="Skype"] floating enable
-for_window [class="Thunar"] floating enable
-for_window [class="Pavucontrol"] floating enable
+# Floating windows
+# Eye of Gnome(image viewer)
 for_window [class="Eog"] floating enable
+# Pavucontrol(sound control)
+for_window [class="Pavucontrol"] floating enable
+# Remmina(remote desktop client)
+for_window [class="Remmina"] floating enable
+# Skype
+for_window [class="Skype"] floating enable
+# Thunar(file manager)
+for_window [class="Thunar"] floating enable
 
 # Hack for spotify
 for_window [class="Spotify"] move to workspace $workspace12
@@ -236,19 +242,22 @@ bar {
 	}
 }
 
-# start dmenu (a program launcher)
-#bindsym $mod+d exec dmenu_run
+# start rofi(program launcher)
 bindsym $mod+space exec rofi -show run
 
 # startup
+# Wallpaper with feh
 exec_always --no-startup-id feh --bg-scale $wallpaper
 exec_always --no-startup-id xrandr --output HDMI2 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI1 --mode 1920x1080 --pos 1920x0 --rotate normal --output VIRTUAL1 --off --output DP1 --mode 1920x1080 --pos 3840x0 --rotate normal
-exec --no-startup-id firefox
 #exec --no-startup-id chromium-browser
-exec --no-startup-id spotify
-
-exec --no-startup-id numlockx
+# Compton for Rofi transparency
 exec --no-startup-id compton
+exec --no-startup-id firefox
+# NetworkManager applet
+exec --no-startup-id nm-applet
+exec --no-startup-id numlockx
+exec --no-startup-id thunderbird
+exec --no-startup-id spotify
 
 # Spotify key bindings
 bindsym $mod+F1 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
