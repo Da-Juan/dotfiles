@@ -9,7 +9,7 @@ if [ -z "$1" ]; then
 	if [[ $mute == yes ]]; then
 		echo " Mute"
 	else
-		echo " $(~/.config/i3/scripts/volume2 "${sink##*\#}")"
+		echo " $(~/.config/i3/scripts/get_volume "${sink##*\#}")"
 	fi
 else
 	case "$1" in
