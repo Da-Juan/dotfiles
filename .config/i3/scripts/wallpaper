@@ -1,5 +1,10 @@
 #!/bin/bash
 files=(~/Pictures/Wallpapers/*)
-WALLPAPER=$(printf "%s\n" "${files[RANDOM % ${#files[@]}]}")
-WALLPAPER2=$(printf "%s\n" "${files[RANDOM % ${#files[@]}]}")
-feh -B black --bg-fill "$WALLPAPER" --bg-fill "$WALLPAPER2"
+
+WALLPAPERS=()
+SCREENS_COUNT=$(xrandr | grep -c  " connected ")
+for ((i=0; i<SCREENS_COUNT; i++)); do
+	WALLPAPERS+=( "--bg-fill" "$(printf "%s\n" "${files[RANDOM % ${#files[@]}]}")" )
+done
+
+feh -B black "${WALLPAPERS[@]}"
