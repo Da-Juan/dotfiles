@@ -5,6 +5,8 @@ Backup for my dotfiles
 git clone --recurse-submodules https://github.com/Da-Juan/dotfiles.git
 ```
 
+Some packages on macOS X need to be installed using  homebrew: https://brew.sh/
+
 ## zsh
 Oh my zsh: http://ohmyz.sh/
 
@@ -13,14 +15,20 @@ zsh-autosuggestions: https://github.com/zsh-users/zsh-autosuggestions
 zsh-syntax-highlighting: https://github.com/zsh-users/zsh-syntax-highlighting
 zsh_virsh_autocompletion: https://github.com/jplitza/zsh-virsh-autocomplete
 
-Packages needed:
+If you want to hide the first element of the prompt (`user@host`) add the following line to you \.profile`:
+```
+export DEFAULT_USER=$USER
+```
+
+### Packages needed
+#### Debian/Ubuntu
 ```
 apt-get install zsh
 ```
 
-If you want to hide the first element of the prompt (`user@host`) add the following line to you \.profile`:
+#### macOS X
 ```
-export DEFAULT_USER=$USER
+brew install zsh
 ```
 
 ## i3wm
@@ -57,10 +65,25 @@ X current working directory: https://github.com/schischi/xcwd
 
 ## Vim
 ### Vim powerline
+#### Debian/Ubuntu
 Packages needed:
 ```
 apt-get install fonts-powerline python3-powerline powerline vim-nox
 ```
+
+#### macOS X
+```
+# Install python 3
+brew install python
+# Install vim and replace system vi command
+brew install vim --override-system-vi
+# Check if python 3 is installed correctly
+which python3
+/usr/local/bin/python3
+# Install powerline
+pip3 install git+git://github.com/powerline/powerline
+```
+
 ### Pathogen
 https://github.com/tpope/vim-pathogen
 ```
@@ -86,6 +109,12 @@ Add this line to your crontab:
 
 ## Useful tools
 
+### Debian/Ubuntu
 ```
-apt-get install htop tig
+apt-get install htop httpie ncdu shellcheck silversearcher-ag tig
+```
+
+### macOS X
+```
+brew install htop httpie ncdu shellcheck the_silver_searcher tig
 ```
