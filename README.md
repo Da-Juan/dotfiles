@@ -11,9 +11,9 @@ Some packages on macOS X need to be installed using  homebrew: https://brew.sh/
 Oh my zsh: http://ohmyz.sh/
 
 Plugins:  
-zsh-autosuggestions: https://github.com/zsh-users/zsh-autosuggestions
-zsh-syntax-highlighting: https://github.com/zsh-users/zsh-syntax-highlighting
-zsh_virsh_autocompletion: https://github.com/jplitza/zsh-virsh-autocomplete
+* zsh-autosuggestions: https://github.com/zsh-users/zsh-autosuggestions
+* zsh-syntax-highlighting: https://github.com/zsh-users/zsh-syntax-highlighting
+* zsh_virsh_autocompletion: https://github.com/jplitza/zsh-virsh-autocomplete
 
 If you want to hide the first element of the prompt (`user@host`) add the following line to you `.profile`:
 ```
@@ -32,9 +32,9 @@ brew install zsh
 ```
 
 ## i3wm
-i3wm: https://i3wm.org/  
-i3wm screencast tutorials: https://www.youtube.com/watch?v=j1I63wGcvU4&list=PL5ze0DjYv5DbCv9vNEzFmP6sU7ZmkGzcf  
-Alex Booker dotfiles: https://github.com/alexbooker/dotfiles/tree/ubuntu
+* i3wm: https://i3wm.org/
+* i3wm screencast tutorials: https://www.youtube.com/watch?v=j1I63wGcvU4&list=PL5ze0DjYv5DbCv9vNEzFmP6sU7ZmkGzcf
+* Alex Booker dotfiles: https://github.com/alexbooker/dotfiles/tree/ubuntu
 
 Packages needed:
 ```
@@ -43,10 +43,10 @@ apt-get install i3-wm i3blocks i3lock rofi compton thunar arc-theme lxappearance
 
 Set Ark Darker theme and Moka icons theme using `lxappearance`
 
-Font Awesome: http://fontawesome.io/
-Octicons: https://octicons.github.com/
-Pomicons: https://github.com/gabrielelana/pomicons
-Yosemite San Francisco Font: https://github.com/supermarin/YosemiteSanFranciscoFont
+* Font Awesome: http://fontawesome.io/
+* Octicons: https://octicons.github.com/
+* Pomicons: https://github.com/gabrielelana/pomicons
+* Yosemite San Francisco Font: https://github.com/supermarin/YosemiteSanFranciscoFont
 
 **Memo**: get the version number of a font
 ```
