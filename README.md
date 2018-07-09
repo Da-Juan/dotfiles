@@ -15,7 +15,7 @@ zsh-autosuggestions: https://github.com/zsh-users/zsh-autosuggestions
 zsh-syntax-highlighting: https://github.com/zsh-users/zsh-syntax-highlighting
 zsh_virsh_autocompletion: https://github.com/jplitza/zsh-virsh-autocomplete
 
-If you want to hide the first element of the prompt (`user@host`) add the following line to you \.profile`:
+If you want to hide the first element of the prompt (`user@host`) add the following line to you `.profile`:
 ```
 export DEFAULT_USER=$USER
 ```
