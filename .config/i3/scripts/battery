@@ -5,7 +5,7 @@ ACPI="$(acpi -b | grep "Battery $BATTERY")"
 if [[ -z "$ACPI" ]]; then
 	exit
 fi
-read -r STATUS PERCENT TIME <<< $(echo "$ACPI" | sed -r "s/^Battery 0: (Full|(Dis)?[Cc]harging), ([0-9]+)%(, ([0-9]+:[0-9]+:[0-9]+))?.*/\1 \3 \5/")
+read -r STATUS PERCENT TIME <<< "$(echo "$ACPI" | sed -r "s/^Battery 0: (Full|(Dis)?[Cc]harging), ([0-9]+)%(, ([0-9]+:[0-9]+:[0-9]+))?.*/\1 \3 \5/")"
 
 TEXT=""
 SHORT=""
@@ -37,6 +37,6 @@ TEXT="$SHORT"
 if [[ ! -z "$TIME" ]]; then
 	TEXT+=" ($TIME)"
 fi
-echo -e $TEXT
-echo -e $SHORT
-echo $COLOR
+echo -e "$TEXT"
+echo -e "$SHORT"
+echo "$COLOR"
