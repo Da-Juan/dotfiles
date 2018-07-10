@@ -145,6 +145,8 @@ bindsym $mod+Shift+equal move container to workspace $workspace12
 # Floating windows
 # Eye of Gnome(image viewer)
 for_window [class="Eog"] floating enable
+# Gnome Calculator
+for_window [class="Gnome-calculator"] floating enable
 # Pavucontrol(sound control)
 for_window [class="Pavucontrol"] floating enable
 # Remmina(remote desktop client)
