@@ -268,3 +268,7 @@ bindsym $mod+F3 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spoti
 bindsym $mod+F10 exec ~/.config/i3/scripts/volume mute
 bindsym $mod+F11 exec ~/.config/i3/scripts/volume down
 bindsym $mod+F12 exec ~/.config/i3/scripts/volume up
+
+# Backlight key bindings
+bindsym XF86MonBrightnessUp exec ~/.config/i3/scripts/backlight +
+bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/backlight -

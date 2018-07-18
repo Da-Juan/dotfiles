@@ -1,0 +1,46 @@
+#!/bin/bash
+# Increase/Decrease step
+STEP=50
+
+BRIGHTNESSDIR="/sys/class/backlight/intel_backlight"
+
+if [[ ! -d "$BRIGHTNESSDIR" ]]; then
+	exit 1
+fi
+
+CURBRIGHTNESS="$(cat "${BRIGHTNESSDIR}/brightness")"
+MAXBRIGHTNESS="$(cat "${BRIGHTNESSDIR}/max_brightness")"
+
+if [[ -z "$1" ]]; then
+	PERCENT="$(( CURBRIGHTNESS * 100 / MAXBRIGHTNESS ))%"
+	echo -e "\xef\x86\x85\x20$PERCENT"
+	echo -e "$PERCENT"
+	echo ""
+	exit
+fi
+
+shopt -s nocasematch
+case $1 in
+	"+" | "incr" | "increase")
+		BRIGHTNESS=$(( CURBRIGHTNESS + STEP ))
+		;;
+	"-" | "decr" | "decrease")
+		BRIGHTNESS=$(( CURBRIGHTNESS - STEP ))
+		;;
+	*)
+		if [[ ! "$1" =~ ^[0-9]+$ ]]; then
+			exit 1
+		fi
+		BRIGHTNESS=$1
+		;;
+esac
+if [[ $BRIGHTNESS -lt 1 ]]; then
+	BRIGHTNESS=1
+elif [[ $BRIGHTNESS -gt $MAXBRIGHTNESS ]]; then
+	BRIGHTNESS=$MAXBRIGHTNESS
+fi
+if [[ $UID -eq 0 ]]; then
+	echo "$BRIGHTNESS" > "${BRIGHTNESSDIR}/brightness"
+else
+	echo "$BRIGHTNESS" | sudo tee "${BRIGHTNESSDIR}/brightness" > /dev/null
+fi
