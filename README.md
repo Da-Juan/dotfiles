@@ -109,6 +109,12 @@ Add this line to your crontab:
 
 ## Useful tools
 
+### bin directory
+
+You can add the `bin` directory to your `PATH` or create symbolic links in `/usr/local/bin`.
+
+* `switch_docking.sh`: reconfigure screens when docking/undocking the laptop, setup your screen order preference in `~/.config/screens`, see `.config/screens.example`.
+
 ### Debian/Ubuntu
 ```
 apt-get install htop httpie ncdu shellcheck silversearcher-ag tig

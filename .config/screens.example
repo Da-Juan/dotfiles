@@ -1,0 +1,3 @@
+# Setup your screen order preference from left to right
+# Check xrandr output to get the screen names
+SCREENS_ORDER=( "HDMI-1" "HDMI-2" )
