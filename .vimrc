@@ -93,6 +93,9 @@ vnoremap <space> zf
 """""""""""""""
 " Python mode "
 """""""""""""""
+" Use python3 syntax checking
+let g:pymode_python = 'python3'
+
 " Python 120 characters line length
 let g:pymode_options_max_line_length=120
 autocmd FileType python set colorcolumn=120
@@ -105,6 +108,12 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " Disable docstring preview on auto-completion for Python
 autocmd FileType python set completeopt=menu
+
+" Enable Rope support
+let g:pymode_rope = 1
+" let g:pymode_rope_completion = 1
+" let g:pymode_rope_complete_on_dot = 1
+" let g:pymode_rope_completion_bind = '<C-Space>'
 
 """"""""
 " YAML "
