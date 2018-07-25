@@ -14,6 +14,8 @@ filetype plugin indent on
 """"""""""""""""""""
 syntax on			" Highlight syntax
 
+" Hide line numbers when file has no filetype or no file was opened
+autocmd BufNewFile,BufRead,VimEnter * if &ft == '' | set nonumber
 set number			" show line numbers
 
 				" toggle line numbering
