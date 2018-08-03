@@ -313,7 +313,7 @@
     appname = Spotify
     summary = *
     urgency = normal
-    foreground = #1ED760
-    background = #121212
+    foreground = "#1ED760"
+    background = "#121212"
 
 # vim: ft=cfg syntax=cfg
