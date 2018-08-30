@@ -171,10 +171,10 @@ assign [class="Spotify"] $workspace12
 # workspace default monitors
 workspace $workspace1 output eDP-1
 workspace $workspace2 output eDP-1
-workspace $workspace3 output DP-2-2
-workspace $workspace4 output DP-2-2
-workspace $workspace11 output DP-2-1
-workspace $workspace12 output DP-2-1
+workspace $workspace3 output DP-2
+workspace $workspace4 output DP-2
+workspace $workspace11 output DP-1-1
+workspace $workspace12 output DP-1-1
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -248,7 +248,7 @@ bindsym $mod+space exec rofi -show run
 # Wallpaper with feh
 exec_always --no-startup-id feh --bg-scale $wallpaper
 # Screens management with xrandr
-exec_always --no-startup-id xrandr --output eDP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-2-2 --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-2-1 --mode 1920x1080 --pos 3840x0 --rotate normal
+exec_always --no-startup-id xrandr --output eDP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-2 --mode 2560x1440 --pos 1920x0 --rotate normal --output DP-1-1 --mode 1920x1080 --pos 4480x0 --rotate normal
 #exec --no-startup-id chromium-browser
 # Compton for Rofi transparency
 exec --no-startup-id compton
