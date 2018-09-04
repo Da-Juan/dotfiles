@@ -38,7 +38,7 @@ brew install zsh
 
 Packages needed:
 ```
-apt-get install i3-wm i3blocks i3lock rofi compton thunar arc-theme lxappearance moka-icon-theme faba-icon-theme pavucontrol terminator dunst feh numlockx
+apt-get install i3-wm i3blocks i3lock rofi compton thunar arc-theme lxappearance moka-icon-theme faba-icon-theme pavucontrol python3 python3-pil terminator dunst feh numlockx
 ```
 
 Set Ark Darker theme and Moka icons theme using `lxappearance`

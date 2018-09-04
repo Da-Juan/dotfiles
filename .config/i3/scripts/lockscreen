@@ -1,5 +1,16 @@
 #!/bin/sh
+revert() {
+	xset dpms 0 0 0
+}
 dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop
 killall -SIGUSR1 dunst
-i3lock -d -I 30 --no-unlock-indicator --tiling --image="$1" --nofork
+trap revert HUP INT TERM
+xset +dpms dpms 30 30 30 
+WALLPAPER=$(~/.config/i3/scripts/lockscreen_wallpaper $1)
+if [ -z "$WALLPAPER" ]; then
+	i3lock --no-unlock-indicator --nofork
+else
+	i3lock --no-unlock-indicator --tiling --image="$WALLPAPER" --nofork
+fi
+revert
 killall -SIGUSR2 dunst
