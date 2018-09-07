@@ -5,7 +5,7 @@ if [[ -r ~/.config/screens ]]; then
 	# shellcheck source=../.config/screens.example
 	source ~/.config/screens
 fi
-if [[ ${#SCREENS_ORDER[@]} -lt 1 ]]; then
+if [[ (${#SCREENS_ORDER[@]} -lt 1 || ${#SCREENS_SIZES[@]} -lt 1) || ${#SCREENS_ORDER[@]} -ne ${#SCREENS_SIZES[@]} ]];then
 	exit 1
 fi
 
@@ -13,17 +13,18 @@ PULSEAUDIO="/usr/bin/pulseaudio"
 WALLPAPER="$HOME/.config/i3/scripts/wallpaper"
 XRANDR="/usr/bin/xrandr"
 
-array_contains () { 
-	local array="$1[@]"
-	local seeking="$2"
-	local in=1
-	for element in "${!array}"; do
-		if [[ "$element" == "$seeking" ]]; then
-			in=0
-			break
-		fi
-	done
-	return $in
+get_index () {
+        local seeking="$1"
+        shift
+        local array=( $@ )
+        local index=-1
+        for ((i=0; i < ${#array[@]}; i++)); do
+                if [[ "${array[$i]}" == "$seeking" ]]; then
+                        index=$i
+                        break
+                fi  
+        done
+        echo $index
 }
 
 setup_screens () {
@@ -33,8 +34,8 @@ setup_screens () {
 	local SETUP_SCREENS="${XRANDR} "
 	local POS=0
 	for SCREEN in "${SCREENS_ORDER[@]}"; do
-		if array_contains CONNECTED_SCREENS "$SCREEN"; then
-			SETUP_SCREENS+="--output $SCREEN --mode 1920x1080 --pos ${POS}x0 "
+		if [[ $(get_index "$SCREEN" "${CONNECTED_SCREENS[@]}") -ge 0 ]]; then
+			SETUP_SCREENS+="--output $SCREEN --mode ${SCREENS_SIZES[$(get_index "$SCREEN"  "${SCREENS_ORDER[@]}")]} --pos ${POS}x0 "
 			((POS+=1920))
 		else
 			SETUP_SCREENS+="--output $SCREEN --off "
