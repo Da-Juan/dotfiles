@@ -35,8 +35,9 @@ setup_screens () {
 	local POS=0
 	for SCREEN in "${SCREENS_ORDER[@]}"; do
 		if [[ $(get_index "$SCREEN" "${CONNECTED_SCREENS[@]}") -ge 0 ]]; then
-			SETUP_SCREENS+="--output $SCREEN --mode ${SCREENS_SIZES[$(get_index "$SCREEN"  "${SCREENS_ORDER[@]}")]} --pos ${POS}x0 "
-			((POS+=1920))
+			SCREEN_SIZE=${SCREENS_SIZES[$(get_index "$SCREEN"  "${SCREENS_ORDER[@]}")]}
+			SETUP_SCREENS+="--output $SCREEN --mode $SCREEN_SIZE --pos ${POS}x0 "
+			((POS+=$(echo "$SCREEN_SIZE" | cut -d"x" -f1)))
 		else
 			SETUP_SCREENS+="--output $SCREEN --off "
 		fi
