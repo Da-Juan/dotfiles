@@ -5,6 +5,9 @@
   title_hide_sizetext = True
   title_transmit_bg_color = "#d30102"
 [keybindings]
+  broadcast_all = None
+  close_term = None
+  close_window = None
 [layouts]
   [[default]]
     [[[child1]]]
