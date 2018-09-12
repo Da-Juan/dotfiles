@@ -6,8 +6,13 @@
   title_transmit_bg_color = "#d30102"
 [keybindings]
   broadcast_all = None
+  broadcast_group = None
   close_term = None
   close_window = None
+  group_all = None
+  group_tab = None
+  insert_number = None
+  insert_padded = None
 [layouts]
   [[default]]
     [[[child1]]]
