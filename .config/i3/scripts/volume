@@ -1,26 +1,27 @@
 #!/bin/bash
-sink=$(pactl list sinks | grep '^Sink #')
+sink=$(pacmd list-sinks | grep '* index:' | sed -E 's/.*index:\s([0-9])+/\1/')
+
 
 if [ -z "$1" ]; then
 	if [[ ${BLOCK_BUTTON:-0} == 1 ]]; then
 		$0 mute
 	fi
-	mute=$(pactl list sinks | grep Mute | sed 's/\sMute: \(.*\)/\1/')
+	mute=$(pacmd list-sinks | sed -n -E '/index: '"$sink"'/,$!d;s/.*muted:\s([yes|no])/\1/p')
 	if [[ $mute == yes ]]; then
 		echo " Mute"
 	else
-		echo " $(~/.config/i3/scripts/get_volume "${sink##*\#}")"
+		echo " $(~/.config/i3/scripts/get_volume "$sink")"
 	fi
 else
 	case "$1" in
 		"up")
-			pactl set-sink-volume "${sink##*\#}" +1%
+			pactl set-sink-volume "$sink" +1%
 			;;
 		"down")
-			pactl set-sink-volume "${sink##*\#}" -1%
+			pactl set-sink-volume "$sink" -1%
 			;;
 		"mute")
-			pactl set-sink-mute "${sink##*\#}" toggle
+			pactl set-sink-mute "$sink" toggle
 			;;
 	esac
 fi
