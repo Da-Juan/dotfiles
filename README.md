@@ -107,6 +107,31 @@ Add this line to your crontab:
 */5 * * * *     ps -C i3 > /dev/null && DISPLAY=:0.0 ~/.config/i3/scripts/wallpaper || true
 ```
 
+## Audio configuration
+### Change default output device
+List devices using:
+```
+pacmd list-sinks | grep -e 'name:' -e 'index:'               
+```
+
+The `*` on the ouptut shows the default device.
+```
+  * index: 0
+	name: <alsa_output.usb-Generic_USB_Audio_200901010001-00.analog-stereo-headphone>
+    index: 1
+	name: <alsa_output.pci-0000_00_1f.3.analog-stereo>
+```
+
+Edit `/etc/pulse/default.pa` and add a line `set-default-sink <device name>`, for example:
+```
+set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo
+```
+
+Then restart pluseaudio:
+```
+pulseaudio -k
+```
+
 ## Useful tools
 
 ### bin directory
