@@ -122,8 +122,10 @@ The `*` on the ouptut shows the default device.
 	name: <alsa_output.pci-0000_00_1f.3.analog-stereo>
 ```
 
-Edit `/etc/pulse/default.pa` and add a line `set-default-sink <device name>`, for example:
+Copy `/etc/pulse/default.pa` to `.config/pulse/default.pa` and add a line `set-default-sink <index|name>`, for example:
 ```
+set-default-sink 1
+# or
 set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo
 ```
 
