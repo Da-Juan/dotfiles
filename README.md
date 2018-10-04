@@ -134,6 +134,15 @@ Then restart pluseaudio:
 pulseaudio -k
 ```
 
+### Automatically mute when jack is unplugged
+ACPI can be used to auotmatically mute/unmute the audio output when the jack is unplugged/plugged.
+
+Copy the files to ACPI events directory and add the `jack_mute.sh` script to the PATH:
+```
+cp etc/acpi/events/jack-* /etc/acpi/events/
+ln -s "$(pwd)/bin/jack_mute.sh" /usr/local/bin
+```
+
 ## Useful tools
 
 ### bin directory
