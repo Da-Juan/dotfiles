@@ -1,7 +1,8 @@
 #!/bin/bash
 # shellcheck disable=SC2009
-USERID="$(/usr/bin/id -u "$(ps -ef | /bin/grep "[p]ulseaudio --start" | /usr/bin/awk '{print $1}')")"
-export PULSE_RUNTIME_PATH=/run/user/"$USERID"/pulse
+PULSEUSER="$(ps -ef | /bin/grep "[p]ulseaudio --start" | /usr/bin/awk '{print $1}')"
+PULSEUSERID="$(/usr/bin/id -u "$PULSEUSER")"
+PULSE_RUNTIME_PATH=/run/user/"$PULSEUSERID"/pulse
 STATUS="$(echo "$@" | /bin/sed -E 's/.*\s((un)?plug).*/\1/')"
 case "$STATUS" in
 	unplug)
@@ -14,7 +15,7 @@ case "$STATUS" in
 		exit 0
 		;;
 esac
-SINKS=$(/usr/bin/pacmd list-sinks | /bin/sed -n -E 's/^([0-9]+) sink\(s\) available./\1/p')
+SINKS=$(/bin/su "$PULSEUSER" /bin/bash -c "PULSE_RUNTIME_PATH=$PULSE_RUNTIME_PATH /usr/bin/pacmd list-sinks | /bin/sed -n -E 's/^([0-9]+) sink\(s\) available./\1/p'")
 for ((i=0; i<SINKS; i++)); do
-	/usr/bin/pacmd set-sink-mute $i $MUTE
+	/bin/su "$PULSEUSER" /bin/bash -c "PULSE_RUNTIME_PATH=$PULSE_RUNTIME_PATH /usr/bin/pacmd set-sink-mute $i $MUTE"
 done
