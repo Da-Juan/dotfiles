@@ -15,7 +15,7 @@ case "$STATUS" in
 		exit 0
 		;;
 esac
-SINKS=$(/bin/su "$PULSEUSER" /bin/bash -c "PULSE_RUNTIME_PATH=$PULSE_RUNTIME_PATH /usr/bin/pacmd list-sinks | /bin/sed -n -E 's/^([0-9]+) sink\(s\) available./\1/p'")
-for ((i=0; i<SINKS; i++)); do
+SINKS=( $(/bin/su "$PULSEUSER" /bin/bash -c "PULSE_RUNTIME_PATH=$PULSE_RUNTIME_PATH /usr/bin/pacmd list-sinks" | /bin/sed -n -E 's/^\s+\*?\s+index:\s([0-9]+)/\1/p') )
+for i in "${SINKS[@]}"; do
 	/bin/su "$PULSEUSER" /bin/bash -c "PULSE_RUNTIME_PATH=$PULSE_RUNTIME_PATH /usr/bin/pacmd set-sink-mute $i $MUTE"
 done
