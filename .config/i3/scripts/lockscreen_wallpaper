@@ -103,7 +103,7 @@ def build_wallpaper(source_image: Image.Image, screen_sizes: Tuple[Tuple[int, in
     source_image.close()
 
     with open(WALLPAPER_FILE, mode="wb") as new_image_file:
-        new_image.save(new_image_file)
+        new_image.save(new_image_file, compress_level=4)
     new_image.close()
     with open(SIZES_CACHE_FILE, mode="w") as cache_file:
         cache_file.write(str(screen_sizes))
