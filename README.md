@@ -153,10 +153,10 @@ You can add the `bin` directory to your `PATH` or create symbolic links in `/usr
 
 ### Debian/Ubuntu
 ```
-apt-get install htop httpie ncdu shellcheck silversearcher-ag tig
+apt-get install htop httpie ncdu shellcheck silversearcher-ag tig xclip
 ```
 
 ### macOS X
 ```
-brew install htop httpie ncdu shellcheck the_silver_searcher tig
+brew install htop httpie ncdu shellcheck the_silver_searcher tig xclip
 ```
