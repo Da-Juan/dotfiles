@@ -53,7 +53,9 @@ plugins=(docker docker-compose git httpie python ssh-agent virtualenv wd zsh-syn
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:$HOME/Scripts/bin"
+if [[ -d "$HOME/Scripts/bin" ]]; then
+	export PATH="$PATH:$HOME/Scripts/bin"
+fi
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
