@@ -61,4 +61,3 @@ setup_wallpapers () {
 setup_screens
 sleep 1
 setup_wallpapers
-restart_pulseaudio
