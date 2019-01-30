@@ -1,5 +1,5 @@
 #!/bin/bash
-sink=$(pacmd list-sinks | grep '* index:' | sed -E 's/.*index:\s([0-9])+/\1/')
+sink=$(pacmd list-sinks | grep '* index:' | sed -E 's/.*index:\s([0-9]+)/\1/')
 
 
 if [ -z "$1" ]; then
