@@ -16,7 +16,7 @@ XRANDR="/usr/bin/xrandr"
 get_index () {
         local seeking="$1"
         shift
-        local array=( $@ )
+        local array=( "$@" )
         local index=-1
         for ((i=0; i < ${#array[@]}; i++)); do
                 if [[ "${array[$i]}" == "$seeking" ]]; then
@@ -28,8 +28,7 @@ get_index () {
 }
 
 setup_screens () {
-	# shellcheck disable=SC2034
-	local CONNECTED_SCREENS=(  $($XRANDR | grep " connected " | cut -f1 -d" ") )
+	mapfile -t CONNECTED_SCREENS <<< "$($XRANDR | grep " connected " | cut -f1 -d" ")"
 
 	local SETUP_SCREENS="${XRANDR} "
 	local POS=0
@@ -54,7 +53,7 @@ restart_pulseaudio () {
 
 setup_wallpapers () {
 	if [ -x "$WALLPAPER" ]; then
-		DISPLAY=:0.0 $WALLPAPER
+		DISPLAY="$(w -h "$USER" | awk '$3 ~ /:[0-9.]*/{print $3}') "$WALLPAPER
 	fi
 }
 
