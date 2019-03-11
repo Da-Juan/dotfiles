@@ -104,7 +104,7 @@ git clone --recursive https://github.com/python-mode/python-mode
 Put some images in `~/Pictures/Wallpapers`
 Add this line to your crontab:
 ```
-*/5 * * * *     ps -C i3 > /dev/null && DISPLAY=:0.0 ~/.config/i3/scripts/wallpaper || true
+*/5 * * * *     ps -C i3 > /dev/null && env USER=$LOGNAME ~/.config/i3/scripts/wallpaper || true
 ```
 
 ## Audio configuration

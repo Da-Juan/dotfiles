@@ -1,6 +1,12 @@
 #!/bin/bash
 files=(~/Pictures/Wallpapers/*)
 
+DISPLAY="$(/usr/bin/w -h "$USER" | awk '$3 ~ /:[0-9.]*/{print $3}')"
+if [ -z "$DISPLAY" ]; then
+	exit 0
+fi
+export DISPLAY
+
 WALLPAPERS=()
 SCREENS_COUNT=$(xrandr | grep -c  " connected ")
 for ((i=0; i<SCREENS_COUNT; i++)); do
