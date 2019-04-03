@@ -30,19 +30,16 @@ get_index () {
 setup_screens () {
 	mapfile -t CONNECTED_SCREENS <<< "$($XRANDR | grep " connected " | cut -f1 -d" ")"
 
-	local SETUP_SCREENS="${XRANDR} "
 	local POS=0
 	for SCREEN in "${SCREENS_ORDER[@]}"; do
 		if [[ $(get_index "$SCREEN" "${CONNECTED_SCREENS[@]}") -ge 0 ]]; then
 			SCREEN_SIZE=${SCREENS_SIZES[$(get_index "$SCREEN"  "${SCREENS_ORDER[@]}")]}
-			SETUP_SCREENS+="--output $SCREEN --mode $SCREEN_SIZE --pos ${POS}x0 "
+			"$XRANDR" --output "$SCREEN" --mode "$SCREEN_SIZE" --pos "$POS"x0
 			((POS+=$(echo "$SCREEN_SIZE" | cut -d"x" -f1)))
 		else
-			SETUP_SCREENS+="--output $SCREEN --off "
+			"$XRANDR" --output "$SCREEN" --off
 		fi
 	done
-	
-	$SETUP_SCREENS
 }
 
 restart_pulseaudio () {
@@ -58,5 +55,5 @@ setup_wallpapers () {
 }
 
 setup_screens
-sleep 1
+sleep 2
 setup_wallpapers
