@@ -150,6 +150,7 @@ ln -s "$(pwd)/bin/jack_mute.sh" /usr/local/bin
 You can add the `bin` directory to your `PATH` or create symbolic links in `/usr/local/bin`.
 
 * `switch_docking.sh`: reconfigure screens when docking/undocking the laptop, setup your screen order preference in `~/.config/screens`, see `.config/screens.example`.
+* `monitor_partitions.sh`: monitor partitions and send a notification email when space or inodes usage is 90% or above, setup your partitions or mount points, email, and threshold, if you want to change it, in `~/.config/partitions_monitor`, see `.config/partitions_monitor.example`.
 
 ### Debian/Ubuntu
 ```

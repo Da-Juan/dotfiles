@@ -1,0 +1,3 @@
+PARTITIONS=( "/" "/var" )
+MAILTO=me@example.com
+#THRESHOLD=80
