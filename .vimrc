@@ -122,6 +122,12 @@ let g:pymode_rope = 1
 " let g:pymode_rope_complete_on_dot = 1
 " let g:pymode_rope_completion_bind = '<C-Space>'
 
+"""""""""""""""""
+" CSS, HTML, JS "
+"""""""""""""""""
+" Use 2 spaces
+autocmd FileType css,html,javascript set ts=2 sts=2 sw=2
+
 """"""""
 " YAML "
 """"""""
