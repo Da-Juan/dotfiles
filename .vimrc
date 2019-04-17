@@ -73,6 +73,8 @@ set hlsearch			" Highlight search
 
 " Press F4 to toggle highlighting on/off, and show current value.
 noremap <F4> :set hlsearch! hlsearch?<CR>
+" Press F5 to clear highlighted search
+noremap <F5> :nohlsearch<CR>
 
 " Press Return to temporarily get out of the highlighted search.
 nnoremap <CR> :nohlsearch<CR><CR>
