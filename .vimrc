@@ -100,8 +100,12 @@ vnoremap <space> zf
 let g:pymode_python = 'python3'
 
 " Python 120 characters line length
-let g:pymode_options_max_line_length=120
-autocmd FileType python set colorcolumn=120
+let g:pymode_options_max_line_length=89
+autocmd FileType python set colorcolumn=89
+
+" Highlight trailing spaces
+highlight BadWhitespace ctermfg=16 ctermbg=166 guifg=#000000 guibg=#d75f00
+autocmd FileType python match BadWhitespace /\s\+$/
 
 " If you prefer the Omni-Completion tip window to close when a selection is
 " made, these lines close it on movement in insert mode or when leaving
@@ -110,7 +114,7 @@ autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " Disable docstring preview on auto-completion for Python
-autocmd FileType python set completeopt=menu
+autocmd FileType python set completeopt=menuone,noinsert
 
 " Enable Rope support
 let g:pymode_rope = 1
