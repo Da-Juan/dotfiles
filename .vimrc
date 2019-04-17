@@ -131,5 +131,5 @@ autocmd FileType css,html,javascript set ts=2 sts=2 sw=2
 """"""""
 " YAML "
 """"""""
-" Use 2 space YAML
+" Use 2 spaces YAML
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
