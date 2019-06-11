@@ -20,6 +20,11 @@ If you want to hide the first element of the prompt (`user@host`) add the follow
 export DEFAULT_USER=$USER
 ```
 
+:warning:  
+Since macOS X El Capitan a helper in `/etc/zprofile` might alter your directories order in your `$PATH` variable.  
+You can comment the lines in that file to keep your `$PATH` order.  
+See http://www.zsh.org/mla/users//2015/msg00724.html for more details.
+
 ### Packages needed
 #### Debian/Ubuntu
 ```
