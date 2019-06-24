@@ -81,7 +81,7 @@ apt-get install fonts-powerline python3-powerline powerline vim-nox
 # Install python 3
 brew install python
 # Install vim and replace system vi command
-brew install vim --override-system-vi
+brew install vim
 # Check if python 3 is installed correctly
 which python3
 /usr/local/bin/python3
@@ -90,17 +90,17 @@ pip3 install git+git://github.com/powerline/powerline
 ```
 
 ### Pathogen
-https://github.com/tpope/vim-pathogen
-```
-mkdir -p ~/.vim/autoload ~/.vim/bundle && \
-curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-```
+https://github.com/tpope/vim-pathogen  
+vim-pathogen is included in this repository as a submodule.
+
 ### Python-mode
-https://github.com/klen/python-mode
-```
-cd ~/.vim/bundle
-git clone --recursive https://github.com/python-mode/python-mode
-```
+https://github.com/klen/python-mode  
+python-mode is included in this repository as a submodule.
+
+### Gitgutter
+https://github.com/airblade/vim-gitgutter  
+vim-gitgutter is included in this repository as a submodule.
+
 ### Syntax highlighting
 * Jinja: https://github.com/Glench/Vim-Jinja2-Syntax
 * SaltStack: https://github.com/saltstack/salt-vim
