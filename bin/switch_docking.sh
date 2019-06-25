@@ -50,7 +50,7 @@ restart_pulseaudio () {
 
 setup_wallpapers () {
 	if [ -x "$WALLPAPER" ]; then
-		DISPLAY="$(w -h "$USER" | awk '$3 ~ /:[0-9.]*/{print $3}') "$WALLPAPER
+		"$WALLPAPER"
 	fi
 }
 
