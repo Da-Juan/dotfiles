@@ -169,18 +169,21 @@ assign [class="Firefox"] $workspace3
 assign [class="Spotify"] $workspace12
 
 # workspace default monitors
-workspace $workspace1 output eDP1
-workspace $workspace2 output eDP1
-workspace $workspace3 output DP2
-workspace $workspace4 output DP2
-workspace $workspace5 output DP2
-workspace $workspace6 output DP2
-workspace $workspace7 output DP2
-workspace $workspace8 output DP1-1
-workspace $workspace9 output DP1-1
-workspace $workspace10 output DP1-1
-workspace $workspace11 output DP1-1
-workspace $workspace12 output DP1-1
+set $screen-left	eDP1
+set $screen-center	DP1
+set $screen-right	DP2-1
+workspace $workspace1 output $screen-left
+workspace $workspace2 output $screen-left
+workspace $workspace3 output $screen-center
+workspace $workspace4 output $screen-center
+workspace $workspace5 output $screen-center
+workspace $workspace6 output $screen-center
+workspace $workspace7 output $screen-center
+workspace $workspace8 output  $screen-right
+workspace $workspace9 output  $screen-right
+workspace $workspace10 output $screen-right
+workspace $workspace11 output $screen-right
+workspace $workspace12 output $screen-right
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
