@@ -1,6 +1,6 @@
 #!/bin/sh
 revert() {
-	xset dpms 0 0 0
+	xset dpms 300 300 300
 }
 dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop
 killall -SIGUSR1 dunst
