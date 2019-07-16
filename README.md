@@ -107,6 +107,15 @@ vim-gitgutter is included in this repository as a submodule.
 
 ## Random wallpapers
 Put some images in `~/Pictures/Wallpapers`
+
+### Systemd timer
+Run the following commands:
+```
+systemctl --user daemon-reload
+systemctl --user enable wallpaper.timer
+systemctl --user start wallpaper.timer
+```
+### Crontab setup
 Add this line to your crontab:
 ```
 */5 * * * *     ps -C i3 > /dev/null && env USER=$LOGNAME ~/.config/i3/scripts/wallpaper || true
