@@ -128,7 +128,7 @@ let g:pymode_rope = 1
 " CSS, HTML, JS "
 """""""""""""""""
 " Use 2 spaces
-autocmd FileType css,html,javascript set ts=2 sts=2 sw=2
+autocmd FileType css,html,javascript set ts=2 sts=2 sw=2 expandtab
 
 """"""""
 " YAML "
