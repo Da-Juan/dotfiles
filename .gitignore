@@ -13,3 +13,6 @@ __pycache__/
 
 # Fontconfig
 .fonts/.uuid
+
+# Systemd
+.config/systemd/user/*.wants

@@ -1,0 +1,6 @@
+[Unit]
+Description=Wallpaper rotation
+
+[Service]
+ExecStart=%h/.config/i3/scripts/wallpaper
+Type=oneshot
