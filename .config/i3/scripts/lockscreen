@@ -1,12 +1,17 @@
-#!/bin/sh
+#!/bin/bash
 revert() {
-	xset dpms 300 300 300
+	now="$(date "+%H%M")"
+	if [[ "${now#0}" -ge 800 ]] && [[ "${now#0}" -lt 1900 ]]; then
+		xset dpms 300 300 300
+	else
+		xset dpms 60 60 60
+	fi
 }
 dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop
 killall -SIGUSR1 dunst
 trap revert HUP INT TERM
 xset +dpms dpms 30 30 30 
-WALLPAPER=$(~/.config/i3/scripts/lockscreen_wallpaper $1)
+WALLPAPER=$(~/.config/i3/scripts/lockscreen_wallpaper "$1")
 if [ -z "$WALLPAPER" ]; then
 	i3lock --no-unlock-indicator --nofork
 else
