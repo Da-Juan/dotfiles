@@ -1,6 +1,6 @@
 #!/bin/bash
 # Increase/Decrease step
-STEP=50
+STEP=400
 
 BRIGHTNESSDIR="/sys/class/backlight/intel_backlight"
 
