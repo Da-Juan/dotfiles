@@ -164,14 +164,14 @@ for_window [class="Spotify"] move to workspace $workspace12
 
 # default workspaces
 assign [class="Thunderbird"] $workspace1
-assign [class="Chromium-browser"] $workspace2
-assign [class="Firefox"] $workspace3
+assign [class="Chromium"] $workspace2
+assign [class="firefox"] $workspace3
 assign [class="Spotify"] $workspace12
 
 # workspace default monitors
-set $screen-left	eDP-1
-set $screen-center	DP-1
-set $screen-right	DP-2-1
+set $screen-left	eDP1
+set $screen-center	DP1
+set $screen-right	DP2-1
 workspace $workspace1 output $screen-left
 workspace $workspace2 output $screen-left
 workspace $workspace3 output $screen-center
@@ -261,11 +261,11 @@ exec_always --no-startup-id xrandr --output eDP-1 --mode 1920x1080 --pos 0x0 --r
 #exec --no-startup-id chromium-browser
 # Compton for Rofi transparency
 exec --no-startup-id compton
-exec --no-startup-id firefox
 # NetworkManager applet
 exec --no-startup-id nm-applet
 exec --no-startup-id numlockx
 exec --no-startup-id thunderbird
+exec --no-startup-id firefox
 exec --no-startup-id spotify
 
 # Spotify key bindings
