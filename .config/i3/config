@@ -254,10 +254,8 @@ bar {
 bindsym $mod+space exec rofi -show run
 
 # startup
-# Wallpaper with feh
-exec_always --no-startup-id feh --bg-scale $wallpaper
-# Screens management with xrandr
-exec_always --no-startup-id xrandr --output eDP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-2 --mode 2560x1440 --pos 1920x0 --rotate normal --output DP-1-1 --mode 1920x1080 --pos 4480x0 --rotate normal
+# Screens management with xrandr and set the wallpaper with feh
+exec_always --no-startup-id "xrandr --output $screen-left --mode 1920x1080 --pos 0x0 --rotate normal --output $screen-center --mode 2560x1440 --pos 1920x0 --rotate normal --output $screen-right --mode 1920x1080 --pos 4480x0 --rotate normal; feh --bg-scale $wallpaper"
 #exec --no-startup-id chromium-browser
 # Compton for Rofi transparency
 exec --no-startup-id compton
