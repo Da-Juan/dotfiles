@@ -11,6 +11,15 @@ filetype plugin indent on
 "au FileType py set autoindent
 "au FileType py set smartindent
 
+""""""""""""""
+" Wokarounds "
+""""""""""""""
+" auto-pairs breaks some accent characters
+" see: https://github.com/jiangmiao/auto-pairs/issues/88
+let g:AutoPairsShortcutBackInsert=''
+let g:AutoPairsShortcutJump=''
+let g:AutoPairsMoveCharacter=''
+
 """"""""""""""""""""
 " General settings "
 """"""""""""""""""""
