@@ -36,6 +36,9 @@ apt-get install zsh
 brew install zsh
 ```
 
+To use Powerline you need to install a patched font, I use Roboto Mono for Powerline.  
+https://github.com/powerline/fonts
+
 ## i3wm
 * i3wm: https://i3wm.org/
 * i3wm screencast tutorials: https://www.youtube.com/watch?v=j1I63wGcvU4&list=PL5ze0DjYv5DbCv9vNEzFmP6sU7ZmkGzcf
