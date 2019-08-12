@@ -68,10 +68,21 @@ nmap <F10> :bnext<CR>
 """""""""""""
 " Powerline "
 """""""""""""
-python3 sys.path.append('/usr/lib/python3.7/site-packages/')
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
+function StartPowerline()
+  python3 from powerline.vim import setup as powerline_setup
+  python3 powerline_setup()
+  python3 del powerline_setup
+endfunction
+
+if isdirectory('/usr/lib/python3.7/site-packages/')
+  " Linux
+  python3 sys.path.append('/usr/lib/python3.7/site-packages/')
+  call StartPowerline()
+elseif isdirectory('/usr/local/lib/python3.7/site-packages/')
+  " OSX / homebrew
+  python3 sys.path.append('/usr/local/lib/python3.7/site-packages/')
+  call StartPowerline()
+endif
 
 " Always show statusline
 set laststatus=2
