@@ -49,7 +49,7 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(docker docker-compose git httpie python ssh-agent virtualenv wd zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(docker docker-compose git httpie python ssh-agent virtualenv wd zsh-autosuggestions zsh-syntax-highlighting)
 
 # User configuration
 
@@ -59,6 +59,11 @@ fi
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
+
+# Disable path highliting
+# See: https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[path]='none'
 
 # Set lighter zsh-autosuggestions foreground color
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
