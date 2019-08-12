@@ -2,7 +2,9 @@
 export DEFAULT_USER=$USER
 
 # Set default editor
-if [ -x /usr/bin/vim ]; then
+if [[ "$(uname -s)" == "Darwin" ]] && [[ -x /usr/local/bin/vim ]]; then
+	export EDITOR="/usr/local/bin/vim"
+elif [ -x /usr/bin/vim ]; then
 	export EDITOR="/usr/bin/vim"
 fi
 if [ -n "$EDITOR" ]; then
@@ -11,6 +13,11 @@ fi
 
 if [ "$(uname -m)" = "Linux" ]; then
 	export VDPAU_DRIVER=va_gl
+fi
+
+# Add /usr/local/bin to PATH if needed
+if [[ ":$PATH:" != *:"/usr/local/bin":* ]]; then
+	export PATH="/usr/local/bin:$PATH"
 fi
 
 # User's bin
