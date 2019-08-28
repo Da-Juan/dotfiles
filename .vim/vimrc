@@ -48,6 +48,10 @@ set scrolloff=10		" let 10 lines before/after cursor during scroll
 set exrc			" enable usage of additional .vimrc files from working directory
 set secure			" prohibit .vimrc files to execute shell, create files, etc...
 
+if has("mac")
+	set backspace=2
+endif
+
 """""""""""""""
 " Color theme "
 """""""""""""""
