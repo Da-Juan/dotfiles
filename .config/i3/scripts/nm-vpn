@@ -1,0 +1,4 @@
+#!/bin/sh
+nmcli -t connection show --active | awk -F ':' '
+/vpn/{name=$1}
+END{if(name) printf("%s\nON\n%s\n", name, "#859900")}'
