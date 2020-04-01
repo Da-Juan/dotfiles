@@ -261,6 +261,7 @@ exec_always --no-startup-id "xrandr --output $screen-left --mode 1920x1080 --pos
 exec --no-startup-id compton
 # NetworkManager applet
 exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
 exec --no-startup-id numlockx
 exec --no-startup-id thunderbird
 exec --no-startup-id firefox
