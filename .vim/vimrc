@@ -33,7 +33,8 @@ set number			" show line numbers
 nnoremap <F3> :set nonumber!<CR>
 imap <F3> <C-O><F3>
 
-set cursorline			" shows line under the cursor's line
+set cursorcolumn		" highlight the cursor's column
+set cursorline			" highlight the line under the cursor
 set showmatch			" shows matching part of bracket pairs (), [], {}
 
 set enc=utf-8			" utf-8 by default
@@ -78,9 +79,9 @@ function StartPowerline()
   python3 del powerline_setup
 endfunction
 
-if isdirectory('/usr/lib/python3.7/site-packages/')
+if isdirectory('/usr/lib/python3.8/site-packages/')
   " Linux
-  python3 sys.path.append('/usr/lib/python3.7/site-packages/')
+  python3 sys.path.append('/usr/lib/python3.8/site-packages/')
   call StartPowerline()
 elseif isdirectory('/usr/local/lib/python3.7/site-packages/')
   " OSX / homebrew
