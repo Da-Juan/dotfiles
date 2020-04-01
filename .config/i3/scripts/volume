@@ -10,7 +10,7 @@ if [ -z "$1" ]; then
 	if [[ $mute == yes ]]; then
 		echo " Mute"
 	else
-		echo " $(~/.config/i3/scripts/get_volume "$sink")"
+		echo " $(pacmd list-sinks | sed -n -E '/index: '"$sink"'/,/index:/s/^\s+volume:.*\s+([0-9]+%).*$/\1/p')"
 	fi
 else
 	case "$1" in
