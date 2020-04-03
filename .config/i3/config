@@ -257,8 +257,8 @@ bindsym $mod+space exec rofi -show run
 # Screens management with xrandr and set the wallpaper with feh
 exec_always --no-startup-id "xrandr --output $screen-left --mode 1920x1080 --pos 0x0 --rotate normal --output $screen-center --mode 2560x1440 --pos 1920x0 --rotate normal --output $screen-right --mode 1920x1080 --pos 4480x0 --rotate normal; feh --bg-scale $wallpaper"
 #exec --no-startup-id chromium-browser
-# Compton for Rofi transparency
-exec --no-startup-id compton
+# Picom for Rofi transparency
+exec --no-startup-id picom -b
 # NetworkManager applet
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
