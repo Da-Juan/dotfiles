@@ -1,14 +1,14 @@
 #!/bin/bash
-files=($HOME/Pictures/Wallpapers/*)
+files=("$HOME"/Pictures/Wallpapers/*)
 
 DisplayName()
 {
   local ttynr="$1"
   declare -A property
   for session in $(loginctl --no-legend list-sessions | awk '{ print $1 }' ); do
-    while IFS="=" read key value ; do
+    while IFS="=" read -r key value ; do
       property[$key]="$value"
-    done < <(loginctl show-session $session)
+    done < <(loginctl show-session "$session")
 
     if [ "${property[VTNr]}" = "$ttynr" ] && [ -n "${property[Display]}" ]; then
       echo "${property[Display]}"

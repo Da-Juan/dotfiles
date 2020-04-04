@@ -36,11 +36,11 @@ else
 fi
 SHORT+=" ${PERCENT}%"
 TEXT="$SHORT"
-if [[ ! -z "$TIME" ]]; then
+if [[ -n "$TIME" ]]; then
 	TEXT+=" ($TIME)"
 fi
 echo -e "$TEXT"
 echo -e "$SHORT"
-if [[ ! -z "$COLOR" ]]; then
+if [[ -n "$COLOR" ]]; then
 	echo "$COLOR"
 fi

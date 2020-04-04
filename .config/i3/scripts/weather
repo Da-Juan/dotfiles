@@ -1,5 +1,5 @@
 #!/bin/bash
 WEATHER="$(curl -s "wttr.in/?format=%c%20%t%o")"
-if [[ "$(echo $WEATHER | wc -m)" -lt 16 && ! "$WEATHER" =~ ^Unknown.*$ ]]; then
+if [[ "${#WEATHER}" -lt 16 && ! "$WEATHER" =~ ^Unknown.*$ ]]; then
 	echo "$WEATHER"
 fi
