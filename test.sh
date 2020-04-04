@@ -7,10 +7,10 @@ set -o pipefail
 
 ERRORS=()
 # find all executables and run `shellcheck`
-for f in $(find . -type f -not \( -ipath "*.git*" -o -ipath "*.oh-my-zsh*" \)| sort -u); do
+for f in $(find . -type f -not \( -ipath "*.git*" -o -ipath "*.oh-my-zsh*" -o -ipath "*.vim/bundle/*" \)| sort -u); do
 	if file "$f" | grep --quiet shell; then
 		{
-			shellcheck "$f" && echo "[OK]: sucessfully linted $f"
+			shellcheck -P SCRIPTDIR -x "$f" && echo "[OK]: sucessfully linted $f"
 		} || {
 			# add to errors
 			ERRORS+=("$f")
