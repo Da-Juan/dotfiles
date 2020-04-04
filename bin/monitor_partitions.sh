@@ -22,6 +22,6 @@ for PARTITION in "${PARTITIONS[@]}"; do
 	fi
 done
 
-if [[ ! -z "$MESSAGES" ]]; then
+if [[ -n "$MESSAGES" ]]; then
 	echo -e "$MESSAGES" | mail -s  "Disk usage warning!" "$MAILTO"
 fi
