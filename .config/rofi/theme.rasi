@@ -34,11 +34,6 @@
     active-background:           rgba ( 0, 43, 55, 100 % );
     selected-active-background:  rgba ( 0, 54, 66, 100 % );
 }
-#window {
-    background-color: transparent;
-    transparency:     "real";
-    padding:          30% 30%;
-}
 #mainbox {
     background-color: @background;
     border:  2;
