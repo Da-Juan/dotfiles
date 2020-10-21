@@ -102,13 +102,13 @@ set $wallpaper ~/Pictures/Wallpapers/wallpaper.png
 bindsym $mod+Shift+x exec ~/.config/i3/scripts/lockscreen $wallpaper
 
 set $workspace1 "1 "
-set $workspace2 "2 "
+set $workspace2 "2 "
 set $workspace3 "3 "
 set $workspace4 "4 "
 set $workspace5 "5"
 set $workspace6 "6"
 set $workspace7 "7"
-set $workspace8 "8"
+set $workspace8 "8 "
 set $workspace9 "9"
 set $workspace10 "10"
 set $workspace11 "11 "
@@ -164,7 +164,8 @@ for_window [class="Spotify"] move to workspace $workspace12
 
 # default workspaces
 assign [class="Thunderbird"] $workspace1
-assign [class="Chromium"] $workspace2
+assign [class="zoom"] $workspace2
+assign [class="Chromium"] $workspace8
 assign [class="firefox"] $workspace3
 assign [class="Spotify"] $workspace12
 
