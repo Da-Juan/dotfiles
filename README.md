@@ -62,15 +62,6 @@ apt-get  install lcdf-typetools
 otfinfo -v .fonts/fontawesome-webfont.ttf 
 ```
 
-## xcwd
-
-Packages needed:
-```
-apt-get install gcc libx11-dev make
-```
-
-X current working directory: https://github.com/schischi/xcwd
-
 ## Vim
 ### Vim powerline
 #### Debian/Ubuntu
