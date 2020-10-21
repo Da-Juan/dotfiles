@@ -73,13 +73,13 @@ fi
 
 # read previous state and update data storage
 read -r -a old < "${path}"
-echo "${time} ${rx} ${tx}" > "${path}"
 
 # parse old data and calc time passed
 time_diff=$(( time - old[0] ))
 
 # sanity check: has a positive amount of time passed
 [[ "${time_diff}" -gt 0 ]] || exit
+echo "${time} ${rx} ${tx}" > "${path}"
 
 # calc bytes transferred, and their rate in byte/s
 rx_diff=$(( rx - old[1] ))
