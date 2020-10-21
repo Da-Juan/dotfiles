@@ -41,3 +41,7 @@ if [ -n "$DISPLAY" ]; then
                xhost local:root > /dev/null
        fi
 fi
+
+precmd() {
+	pwd > /tmp/.whereami
+}
