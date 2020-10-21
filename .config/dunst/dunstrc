@@ -316,4 +316,16 @@
     foreground = "#1ED760"
     background = "#121212"
 
+[problem_ignore]
+    appname = Thunderbird
+    body = "\*\* PROBLEM*"
+    history_ignore = yes
+    format = ""
+
+[recovery_ignore]
+    appname = Thunderbird
+    body = "\*\* RECOVERY*"
+    history_ignore = yes
+    format = ""
+
 # vim: ft=cfg syntax=cfg
