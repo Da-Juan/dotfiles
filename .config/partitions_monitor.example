@@ -1,3 +1,9 @@
 PARTITIONS=( "/" "/var" )
 MAILTO=me@example.com
-#THRESHOLD=80
+# Disk usage percent
+#THRESHOLD=90
+# Disk inodes percent
+#ITHRESHOLD=90
+# Time interval between two identical alerts in seconds
+# 86400 seconds = 24 hours
+#INTERVAL=86400

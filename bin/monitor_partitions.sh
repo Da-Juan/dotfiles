@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [[ -r ~/.config/partitions_monitor ]]; then
         # shellcheck source=../.config/partitions_monitor.example
@@ -7,21 +7,48 @@ else
 	exit 1
 fi
 
-if [[ ${#PARTITIONS[@]} -lt 1 || -z "$MAILTO" ]]; then
+if [[ ${#PARTITIONS[@]} -lt 1 || -z "$MAILTO" || -z "$MAILFROM" ]]; then
 	exit 1
 fi
 
-MESSAGES=""
-for PARTITION in "${PARTITIONS[@]}"; do
-	read -r PCENT IPCENT <<< "$(df --output=pcent,ipcent "$PARTITION" | sed 1d)"
-	if [[ "${PCENT%\%}" -ge "${THRESHOLD-90}" ]]; then
-		MESSAGES="${MESSAGES}WARNING partition $PARTITION usage is $PCENT\\n"
+status_dir="/var/tmp/partitions_monitor"
+
+if [ ! -d "$status_dir" ]; then
+	mkdir -p "$status_dir"
+fi
+
+function check(){
+	name="$1"
+	threshold="$2"
+	value="$3"
+	status="$4"
+	# 86400 seconds = 24 hours
+	if [ -f "$status" ] && [ $(( "$(stat --format=%Y "$status")" + "${INTERVAL-86400}" )) -le "$(date "+%s")" ]; then
+		rm "$status"
 	fi
-	if [[ "${IPCENT%\%}" -ge "${THRESHOLD-90}" ]]; then
-		MESSAGES="${MESSAGES}WARNING partition $PARTITION inodes usage is $IPCENT\\n"
+	alert=0
+	if [[ "$value" -ge "$threshold" ]]; then
+		alert=1
+		if [ -f "$status" ] && [ "$value" -eq "$(cat "$status")" ]; then
+			alert=0
+		fi
+		if [ "$alert" -eq 1 ]; then
+			echo "$value" > "$status"
+			# shellcheck disable=SC2028
+			echo "WARNING partition $name usage is ${value}%\\n"
+		fi
+	else
+		[ -f "$status" ] && rm "$status"
 	fi
+}
+
+messages=""
+for partition in "${PARTITIONS[@]}"; do
+	read -r PCENT IPCENT <<< "$(df --output=pcent,ipcent "$partition" | sed 1d)"
+	messages="${messages}$(check "$partition" "${THRESHOLD-90}" "${PCENT%\%}" "$status_dir/${partition}_pcent")"
+	messages="${messages}$(check "$partition" "${ITHRESHOLD-90}" "${IPCENT%\%}" "$status_dir/${partition}_ipcent")"
 done
 
-if [[ -n "$MESSAGES" ]]; then
-	echo -e "$MESSAGES" | mail -s  "Disk usage warning!" "$MAILTO"
+if [[ -n "$messages" ]]; then
+	echo -e "$messages" | mail -aFrom:"$MAILFROM" "Disk usage warning!" "$MAILTO"
 fi
