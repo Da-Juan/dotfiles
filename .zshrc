@@ -96,6 +96,9 @@ export LC_ALL=en_US.UTF-8
 if [[ -f $HOME/.aliases ]]; then
 	source $HOME/.aliases
 fi
+if [[ -f $HOME/.local_aliases ]]; then
+	source $HOME/.local_aliases
+fi
 
 if [[ -f $HOME/.profile ]]; then
 	source $HOME/.profile

@@ -16,3 +16,6 @@ __pycache__/
 
 # Systemd
 .config/systemd/user/*.wants
+
+# Shell
+.local_aliases
