@@ -50,5 +50,5 @@ for partition in "${PARTITIONS[@]}"; do
 done
 
 if [[ -n "$messages" ]]; then
-	echo -e "$messages" | mail -aFrom:"$MAILFROM" "Disk usage warning!" "$MAILTO"
+	echo -e "$messages" | mail -aFrom:"$MAILFROM" -s "Disk usage warning!" "$MAILTO"
 fi
