@@ -79,9 +79,13 @@ function StartPowerline()
   python3 del powerline_setup
 endfunction
 
-if isdirectory('/usr/lib/python3.8/site-packages/')
-  " Linux
-  python3 sys.path.append('/usr/lib/python3.8/site-packages/')
+if isdirectory('/usr/lib/python3.9/site-packages/')
+  " Arch Linux
+  python3 sys.path.append('/usr/lib/python3.9/site-packages/')
+  call StartPowerline()
+elseif isdirectory('/usr/lib/python3/dist-packages/')
+  " Debian based Linux
+  python3 sys.path.append('/usr/lib/python3/dist-packages/')
   call StartPowerline()
 elseif isdirectory('/usr/local/lib/python3.7/site-packages/')
   " OSX / homebrew
