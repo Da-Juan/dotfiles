@@ -251,7 +251,7 @@ prompt_kube() {
   (( $+commands[kubectl] )) || return
 	[[ "${KUBE_PROMPT_ENABLED}" == "off" ]] && return
 	local kube_prompt="k8s: "
-  local current_context="$(kubectl config current-context)"
+  local current_context="$(kubectl config current-context 2>/dev/null)"
   local current_namespace="$(kubectl config get-contexts --no-headers | grep '*' | awk '{print $5}')"
   [[ -z "${current_context}" ]] && return
   kube_prompt+="${current_context}"
