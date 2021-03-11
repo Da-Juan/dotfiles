@@ -173,8 +173,8 @@ assign [class="firefox"] $workspace3
 assign [class="Spotify"] $workspace12
 
 # workspace default monitors
-set $screen-left	eDP1
-set $screen-center	DP1
+set $screen-left	eDP-1
+set $screen-center	DP-1
 set $screen-right	DP2-3
 workspace $workspace1 output $screen-left
 workspace $workspace2 output $screen-left
