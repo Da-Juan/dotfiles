@@ -28,10 +28,14 @@ get_index () {
 }
 
 setup_screens () {
+	mapfile -t ALL_SCREENS < <($XRANDR | grep -E "(dis)?connected " | cut -f1 -d" ")
 	mapfile -t CONNECTED_SCREENS < <($XRANDR | grep " connected " | cut -f1 -d" ")
 
 	local POS=0
 	for SCREEN in "${SCREENS_ORDER[@]}"; do
+		if [[ " ${ALL_SCREENS[*]} " != *" $SCREEN "* ]]; then
+			continue
+		fi
 		if [[ " ${CONNECTED_SCREENS[*]} " == *" $SCREEN "* ]]; then
 			SCREEN_SIZE=${SCREENS_SIZES[$(get_index "$SCREEN"  "${SCREENS_ORDER[@]}")]}
 			"$XRANDR" --output "$SCREEN" --mode "$SCREEN_SIZE" --pos "$POS"x0
