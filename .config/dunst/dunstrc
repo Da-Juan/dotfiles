@@ -328,4 +328,16 @@
     history_ignore = yes
     format = ""
 
+[host_up_ignore]
+    appname = Thunderbird
+    body = "Host UP*"
+    history_ignore = yes
+    format = ""
+
+[host_down_ignore]
+    appname = Thunderbird
+    body = "Host DOWN*"
+    history_ignore = yes
+    format = ""
+
 # vim: ft=cfg syntax=cfg
