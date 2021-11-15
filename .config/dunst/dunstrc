@@ -162,6 +162,8 @@
     #horizontal_padding = 8
     horizontal_padding = 10
 
+    frame_width = 0
+
     # Define a color for the separator.
     # possible values are:
     #  * auto: dunst tries to find a color fitting to the background;
@@ -199,11 +201,6 @@
     # Calculate the dpi to use on a per-monitor basis.
     # Please note that this setting will not work if Xft.dpi X resource is set.
     per_monitor_dpi = false
-
-[frame]
-    #width = 3
-    width = 0
-    color = "#aaaaaa"
 
 [shortcuts]
 
@@ -337,6 +334,18 @@
 [host_down_ignore]
     appname = Thunderbird
     body = "Host DOWN*"
+    history_ignore = yes
+    format = ""
+
+[bacula_ignore]
+    appname = Thunderbird
+    body = "Bacula *"
+    history_ignore = yes
+    format = ""
+
+[unattended_upgrades_ignore]
+    appname = Thunderbird
+    body = "* unattended-upgrades *"
     history_ignore = yes
     format = ""
 
