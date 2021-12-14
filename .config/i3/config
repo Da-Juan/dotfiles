@@ -255,7 +255,7 @@ bar {
 }
 
 # start rofi(program launcher)
-bindsym $mod+space exec rofi -show run
+bindsym $mod+space exec zsh -c "rofi -show run"
 
 # startup
 # Screens management with xrandr and set the wallpaper with feh
