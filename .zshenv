@@ -23,6 +23,9 @@ fi
 # User's bin
 export PATH="$HOME/.local/bin:$PATH"
 
+# Snap's bin
+export PATH="$PATH:/var/lib/snapd/snap/bin"
+
 # pyenv 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
