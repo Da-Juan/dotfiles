@@ -270,6 +270,11 @@ exec --no-startup-id thunderbird
 exec --no-startup-id firefox
 exec --no-startup-id spotify
 
+# Dunst key bindings
+bindsym Control+space exec dunstctl close
+bindsym Control+Shift+space exec dunstctl close-all
+bindsym Control+ampersand exec dunstctl history-pop
+
 # Spotify key bindings
 bindsym $mod+F1 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 bindsym $mod+F2 exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
