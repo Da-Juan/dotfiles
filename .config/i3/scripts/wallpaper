@@ -1,5 +1,8 @@
 #!/bin/bash
-files=("$HOME"/Pictures/Wallpapers/*)
+WALLPAPERS_DIR="$HOME/Pictures/Wallpapers"
+[ ! -d "$WALLPAPERS_DIR" ] && exit
+
+files=("$WALLPAPERS_DIR"/*)
 
 DisplayName()
 {
