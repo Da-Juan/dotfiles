@@ -1,6 +1,6 @@
 alias setclip="xclip -selection c"
 alias getclip="xclip -selection c -o"
-alias scrot2clip="scrot '/tmp/%Y-%m-%d-%H%M%S_\$wx\$h_scrot.png' -s -e 'xclip -selection clipboard -target image/png -i \$f'"
+alias screencap="scrot '/tmp/screencap_%Y%m%d-%H%M%S_\$wx\$h.png' -s -e 'xclip -selection clipboard -target image/png -i \$f'"
 
 case "$(basename "$(readlink -f /proc/$$/exe)")" in
 	zsh) hr(){ printf '%0*d' "$(tput cols)" 0 | sed s/0/"${1:-_}"/g; };;
