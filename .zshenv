@@ -1,5 +1,5 @@
 # Hide user from Oh my zsh prompt
-export DEFAULT_USER=$USER
+export DEFAULT_USER="$USER"
 
 # Set default editor
 if [[ "$(uname -s)" == "Darwin" ]] && [[ -x /usr/local/bin/vim ]]; then
@@ -46,7 +46,7 @@ if [ -n "$DISPLAY" ]; then
 fi
 
 precmd() {
-	pwd > /tmp/.whereami
+	pwd > /tmp/."$USER"-whereami
 }
 
 setopt extended_history
