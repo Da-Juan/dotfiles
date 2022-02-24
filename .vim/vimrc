@@ -1,18 +1,32 @@
-" Pathogen load
-filetype off
+""""""""""
+" Vundle "
+""""""""""
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-runtime bundle/vim-pathogen/autoload/pathogen.vim
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-call pathogen#infect()
-call pathogen#helptags()
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-"set nocompatible
-filetype plugin indent on
-"au FileType py set autoindent
-"au FileType py set smartindent
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'python-mode/python-mode'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'ycm-core/YouCompleteMe'
+Plugin 'psf/black'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" END Vundle
 
 """"""""""""""
-" Wokarounds "
+" Workarounds "
 """"""""""""""
 " auto-pairs breaks some accent characters
 " see: https://github.com/jiangmiao/auto-pairs/issues/88
@@ -33,8 +47,10 @@ set number			" show line numbers
 nnoremap <F3> :set nonumber!<CR>
 imap <F3> <C-O><F3>
 
-set cursorcolumn		" highlight the cursor's column
-set cursorline			" highlight the line under the cursor
+" set cursorcolumn		" highlight the cursor's column
+" set cursorline			" highlight the line under the cursor
+nnoremap <F7> :set nocursorcolumn! nocursorline!<CR>
+imap <F7> <C-O><F7>
 set showmatch			" shows matching part of bracket pairs (), [], {}
 
 set enc=utf-8			" utf-8 by default
@@ -79,17 +95,27 @@ function StartPowerline()
   python3 del powerline_setup
 endfunction
 
-if isdirectory('/usr/lib/python3.9/site-packages/')
+function GetPythonVersion()
+  let g:python_version = substitute(system("python -V"), '^python \([0-9]\+\.[0-9]\+\)\(\.[0-9]\+\)\?.*\c', '\1', '')
+endfunction
+
+call GetPythonVersion()
+let python_arch_path = '/usr/lib/python' . g:python_version . '/site-packages/'
+let python_homebrew_path = '/usr/local/lib/python' . g:python_version . '/site-packages/'
+
+if isdirectory(python_arch_path)
   " Arch Linux
-  python3 sys.path.append('/usr/lib/python3.9/site-packages/')
+  python3 import vim
+  python3 sys.path.append(vim.eval("python_arch_path"))
   call StartPowerline()
 elseif isdirectory('/usr/lib/python3/dist-packages/')
   " Debian based Linux
   python3 sys.path.append('/usr/lib/python3/dist-packages/')
   call StartPowerline()
-elseif isdirectory('/usr/local/lib/python3.7/site-packages/')
+elseif isdirectory(python_homebrew_path)
   " OSX / homebrew
-  python3 sys.path.append('/usr/local/lib/python3.7/site-packages/')
+  python3 import vim
+  python3 sys.path.append(vim.eval("python_homebrew_path"))
   call StartPowerline()
 endif
 
@@ -101,6 +127,8 @@ set laststatus=2
 """""""""""""""""""
 set incsearch			" Incremental search
 set hlsearch			" Highlight search
+set ignorecase			" Case insensitive search
+set smartcase			" Search for capital letters specifically
 
 " Press F4 to toggle highlighting on/off, and show current value.
 noremap <F4> :set hlsearch! hlsearch?<CR>
@@ -123,6 +151,15 @@ set foldlevel=99
 " Enable folding with the spacebar
 nnoremap <space> za
 vnoremap <space> zf
+
+"""""""""
+" Black "
+"""""""""
+let g:black_virtualenv = '~/.virtualenvs/black'
+
+" autocmd BufWritePre *.py execute ':Black'
+"
+nnoremap <F11> :Black<CR>
 
 """""""""""""""
 " Python mode "
@@ -188,3 +225,9 @@ endfunction
 
 command! -range=% HighlightRepeats <line1>,<line2>call HighlightRepeats()
 map <F6> :HighlightRepeats<CR>
+
+"""""""""""""""""""
+" Slides commands "
+"""""""""""""""""""
+
+command! Tl normal a <!-- .element class="text-left" -->

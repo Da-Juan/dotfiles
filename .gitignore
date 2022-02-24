@@ -9,6 +9,7 @@ __pycache__/
 # Vim
 *.swp
 .netrwhist
+.vim/bundle
 .vim/doc/tags
 
 # Fontconfig
