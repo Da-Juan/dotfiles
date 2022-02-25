@@ -306,8 +306,7 @@ if [ $SETUP_PKG -eq 1 ]; then
 fi
 
 msg "Cloning repositories..."
-# TODO: Change branch merged in master
-git_clone_or_pull "https://github.com/Da-Juan/dotfiles.git" "$CLONE_DIR/dotfiles" arch|| {
+git_clone_or_pull "https://github.com/Da-Juan/dotfiles.git" "$CLONE_DIR/dotfiles" || {
 	error "git clone of dotfiles repo failed"
 	exit 1
 }
