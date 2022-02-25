@@ -6,17 +6,17 @@ LOG_FILE="$HOME/dotfiles-setup$(date "+%s").log"
 
 COLORS="$(tput colors)"
 if (( COLORS >= 8 && COLORS < 256 )); then
-	BOLD="\e[1m"
-	END="\e[0m"
-	GREEN="\e[32m"
-	RED="\e[31m"
-	YELLOW="\e[33m"
+	BOLD="\033[1m"
+	END="\033[0m"
+	GREEN="\033[32m"
+	RED="\033[31m"
+	YELLOW="\033[33m"
 elif (( COLORS >= 256 )); then
-	BOLD="\e[1m"
-	END="\e[0m"
-	GREEN="\e[38;5;82m"
-	RED="\e[38;5;196m"
-	YELLOW="\e[38;5;220m"
+	BOLD="\033[1m"
+	END="\033[0m"
+	GREEN="\033[38;5;82m"
+	RED="\033[38;5;196m"
+	YELLOW="\033[38;5;220m"
 fi
 
 SETUP_ZSH=0
