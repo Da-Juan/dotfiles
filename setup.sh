@@ -49,8 +49,8 @@ function query_yes_no {
 	local ret
 
 	if [ "$1" = "--default" ]; then
-		if [[ "${2,,}" =~ [yn] ]];then
-			case "${2,,}" in
+		if [[ "$(echo "$2" | awk '{print tolower($0)}')" =~ [yn] ]];then
+			case "$(echo "$2" | awk '{print tolower($0)}')" in
 				"y")
 					default="[Y/n] "
 					ret=0
@@ -73,7 +73,7 @@ function query_yes_no {
 		if [ -z "$choice" ] && [ -n "$default" ]; then
 			return "$ret"
 		fi
-		case "${choice,,}" in
+		case "$(echo "$choice" | awk '{print tolower($0)}')" in
 			"y")
 				return 0
 				;;
