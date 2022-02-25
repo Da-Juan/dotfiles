@@ -2,7 +2,7 @@
 Backup for my dotfiles
 
 ```
-git clone --recurse-submodules https://github.com/Da-Juan/dotfiles.git
+curl -sSL https://github.com/Da-Juan/dotfiles/raw/master/setup.sh | bash
 ```
 
 Some packages on macOS X need to be installed using  homebrew: https://brew.sh/
