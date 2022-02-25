@@ -193,6 +193,15 @@ function sudo {
 	"$@"
 }
 
+function install_yay {
+	sudo pacman -S --needed base-devel
+	yay_tmp_dir="$(mktemp -d --suffix=yay)"
+	git clone https://aur.archlinux.org/yay.git "$yay_tmp_dir"
+	cd "$yay_tmp_dir" || return
+	makepkg -si
+	cd - > /dev/null || return
+}
+
 [ ! -d "$CLONE_DIR" ] && mkdir -p "$CLONE_DIR"
 
 # Pre-flight checks
@@ -201,7 +210,7 @@ if [ "$OSTYPE" = "linux-gnu" ]; then
 		if query_yes_no "--default" "y" "You are not root, should I use sudo?"; then
 			use_sudo=1
 		else
-			if command -v git; then
+			if command -v git >/dev/null; then
 				warning "No root permissions, no packages will be installed"
 				SETUP_PKG=0
 			else
@@ -258,15 +267,16 @@ if [ $SETUP_PKG -eq 1 ]; then
 					DISTRO="arch"
 					PKG_MANAGER="pacman"
 					PKG_UPDATE=("$PKG_MANAGER" "-Sy")
-					PKG_INSTALL=("$PKG_MANAGER" "-S" "--noconfirm")
+					PKG_INSTALL=("$PKG_MANAGER" "-S" "--noconfirm" "--needed")
+					AUR_INSTALL=("yay" "-S" "--noconfirm" "--needed")
 					;;
 			esac
 		fi
 
 		I3=("i3-wm" "i3blocks" "i3lock" "rofi" "thunar" "lxappearance"
-		    "moka-icon-theme" "faba-icon-theme" "pavucontrol"
-		    "terminator" "dunst" "feh" "numlockx"
+		    "pavucontrol" "terminator" "dunst" "feh" "numlockx"
 	    	)
+		I3_AUR=("moka-icon-theme-git" "faba-icon-theme-git")
 		case "$DISTRO" in
 			"arch")
 				TOOLS+=("the_silver_searcher")
@@ -294,18 +304,27 @@ if [ $SETUP_PKG -eq 1 ]; then
 		PYTHON=("python")
 		VIM=("vim")
 	fi
-	PKGS=("${PREREQUISITES[@]}")
 
+	declare -a AUR_PKGS
+	declare -a PKGS
 	[ $SETUP_ZSH -eq 1 ] && PKGS+=("${TOOLS[@]}")
 	[ $SETUP_PYTHON -eq 1 ] && PKGS+=("${PYTHON[@]}")
 	[ $SETUP_VIM -eq 1 ] && PKGS+=("${VIM[@]}")
-	[ $SETUP_I3 -eq 1 ] && PKGS+=("${I3[@]}")
+	[ $SETUP_I3 -eq 1 ] && {
+		PKGS+=("${I3[@]}")
+		AUR_PKGS+=("${I3_AUR[@]}")
+	}
 
 	msg "Updating packages database..."
 	sudo "${PKG_UPDATE[@]}" 2>> "$LOG_FILE" || error "Packages database update failed"
 
+	msg "Installing prerquisites..."
+	sudo "${PKG_INSTALL[@]}" "${PREREQUISITES[@]}" 2>> "$LOG_FILE" || error "Errors occured during packages installation"
+	[ "${#AUR_PKGS}" -ne 0 ] && ! command -v yay > /dev/null && install_yay
+
 	msg "Installing packages..."
 	sudo "${PKG_INSTALL[@]}" "${PKGS[@]}" 2>> "$LOG_FILE" || error "Errors occured during packages installation"
+	[ "${#AUR_PKGS}" -ne 0 ] && "${AUR_INSTALL[@]}" "${AUR_PKGS[@]}" 2>> "$LOG_FILE" || error "Errors occured during packages installation"
 
 	[[ "$OSTYPE" =~ ^darwin.* ]] && [ $SETUP_VIM -eq 1 ] && pip3 install git+git://github.com/powerline/powerline
 fi
