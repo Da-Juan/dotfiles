@@ -25,6 +25,8 @@ SETUP_VIM=0
 SETUP_I3=0
 SETUP_PKG=1
 
+use_sudo=0
+
 function error {
 	MSG="${BOLD}${RED}ERROR:${END} $1"
 	echo -e "$MSG" 1>&2
@@ -186,15 +188,18 @@ function setup_links {
 	done
 }
 
-SUDO=""
+function sudo {
+	[ "$use_sudo" -eq 1 ] && set -- command sudo "$@"
+	"$@"
+}
 
 [ ! -d "$CLONE_DIR" ] && mkdir -p "$CLONE_DIR"
 
 # Pre-flight checks
 if [ "$OSTYPE" = "linux-gnu" ]; then
-	if [ "$UID" -ne 0 ]; then
+	if [ "$EUID" -ne 0 ]; then
 		if query_yes_no "--default" "y" "You are not root, should I use sudo?"; then
-			SUDO="sudo"
+			use_sudo=1
 		else
 			if command -v git; then
 				warning "No root permissions, no packages will be installed"
@@ -297,10 +302,10 @@ if [ $SETUP_PKG -eq 1 ]; then
 	[ $SETUP_I3 -eq 1 ] && PKGS+=("${I3[@]}")
 
 	msg "Updating packages database..."
-	"$SUDO" "${PKG_UPDATE[@]}" 2>> "$LOG_FILE" || error "Packages database update failed"
+	sudo "${PKG_UPDATE[@]}" 2>> "$LOG_FILE" || error "Packages database update failed"
 
 	msg "Installing packages..."
-	"$SUDO" "${PKG_INSTALL[@]}" "${PKGS[@]}" 2>> "$LOG_FILE" || error "Errors occured during packages installation"
+	sudo "${PKG_INSTALL[@]}" "${PKGS[@]}" 2>> "$LOG_FILE" || error "Errors occured during packages installation"
 
 	[[ "$OSTYPE" =~ ^darwin.* ]] && [ $SETUP_VIM -eq 1 ] && pip3 install git+git://github.com/powerline/powerline
 fi
