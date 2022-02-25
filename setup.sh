@@ -68,7 +68,7 @@ function query_yes_no {
 
 	while true; do
 		echo -ne "${BOLD}${GREEN}->${END} $question $default"
-		read -n 1 -r choice
+		read -n 1 -r choice < /dev/tty
 		echo
 		if [ -z "$choice" ] && [ -n "$default" ]; then
 			return "$ret"
