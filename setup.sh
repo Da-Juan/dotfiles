@@ -155,11 +155,11 @@ function setup_vim {
 	vim -u "$vim_setup_file" +PluginInstall +qall
 	rm "$vim_setup_file"
 
-	#if [ -d "$vim_path"/bundle/YouCompleteMe ]; then
-	#	cd "$vim_path"/bundle/YouCompleteMe || return
-	#	./install.py --clang-completer --go-completer
-	#	cd - > /dev/null || return
-	#fi
+	if [ -d "$vim_path"/bundle/YouCompleteMe ]; then
+		cd "$vim_path"/bundle/YouCompleteMe || return
+		./install.py --clang-completer --go-completer
+		cd - > /dev/null || return
+	fi
 
 	black_venv_path="$HOME/.virtualenvs/black"
 	if [ "$SETUP_PYTHON" -eq 1 ] && [ ! -d "$black_venv_path" ]; then
