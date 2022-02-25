@@ -205,7 +205,7 @@ if [ "$OSTYPE" = "linux-gnu" ]; then
 			fi
 		fi
 	fi
-elif [ "$OSTYPE" = "darwin" ]; then
+elif [[ "$OSTYPE" =~ ^darwin.* ]]; then
 	if ! command -v brew > /dev/null; then
 		if query_yes_no "--default" "y" "Install brew?"; then
 			msg "Installing brew..."
@@ -280,7 +280,7 @@ if [ $SETUP_PKG -eq 1 ]; then
 				exit 1
 				;;
 		esac
-	elif [ "$OSTYPE" = "darwin" ]; then
+	elif [[ "$OSTYPE" =~ ^darwin.* ]]; then
 		PKG_MANAGER="brew"
 		PKG_UPDATE=("$PKG_MANAGER" "update")
 		PKG_INSTALL=("$PKG_MANAGER" "install")
@@ -302,7 +302,7 @@ if [ $SETUP_PKG -eq 1 ]; then
 	msg "Installing packages..."
 	"$SUDO" "${PKG_INSTALL[@]}" "${PKGS[@]}" 2>> "$LOG_FILE" || error "Errors occured during packages installation"
 
-	[ "$OSTYPE" = "darwin" ] && [ $SETUP_VIM -eq 1 ] && pip3 install git+git://github.com/powerline/powerline
+	[[ "$OSTYPE" =~ ^darwin.* ]] && [ $SETUP_VIM -eq 1 ] && pip3 install git+git://github.com/powerline/powerline
 fi
 
 msg "Cloning repositories..."
