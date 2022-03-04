@@ -159,7 +159,7 @@ function setup_vim {
 
 	if [ -d "$vim_path"/bundle/YouCompleteMe ]; then
 		cd "$vim_path"/bundle/YouCompleteMe || return
-		./install.py --clang-completer --go-completer
+		./install.py --clang-completer
 		cd - > /dev/null || return
 	fi
 
@@ -277,17 +277,18 @@ if [ $SETUP_PKG -eq 1 ]; then
 		    "pavucontrol" "terminator" "dunst" "feh" "numlockx"
 	    	)
 		I3_AUR=("moka-icon-theme-git" "faba-icon-theme-git")
+		VIM=("cmake" "make" "gcc" "powerline")
 		case "$DISTRO" in
 			"arch")
 				TOOLS+=("the_silver_searcher")
 				PYTHON=("python" "python-pip")
-				VIM=("powerline-fonts" "python" "python-powerline" "powerline" "vim")
+				VIM+=("powerline-fonts" "python" "python-powerline" "vim")
 				I3+=("arc-gtk-theme" "python" "python-pillow")
 				;;
 			"debian")
 				TOOLS+=("silversearcher-ag")
 				PYTHON=("python3" "python3-dev" "python3-pip" "python3-venv")
-				VIM=("fonts-powerline" "python3" "python3-powerline" "powerline" "vim-nox")
+				VIM+=("fonts-powerline" "python3" "python3-powerline" "vim-nox")
 				I3+=("arc-theme" "python3" "python3-pil")
 				;;
 			*)
