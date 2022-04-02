@@ -194,11 +194,11 @@ function sudo {
 }
 
 function install_yay {
-	sudo pacman -S --needed base-devel
+	sudo pacman -S --needed --noconfirm base-devel
 	yay_tmp_dir="$(mktemp -d --suffix=yay)"
 	git clone https://aur.archlinux.org/yay.git "$yay_tmp_dir"
 	cd "$yay_tmp_dir" || return
-	makepkg -si
+	makepkg --noconfirm -si
 	cd - > /dev/null || return
 }
 
