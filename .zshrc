@@ -107,9 +107,9 @@ fi
 # kubectl completion
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
-# SSH hostname completion for Mac OS X
 if [[ "$(uname -s)" == "Darwin" ]]; then
 	h=()
+	# SSH hostname completion for Mac OS X
 	if [[ -r ~/.ssh/config ]]; then
 		h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
 	fi
@@ -121,5 +121,9 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
 		zstyle ':completion:*:slogin:*' hosts $h
 		zstyle ':completion:*:scp:*' hosts $h
 		zstyle ':completion:*:rsync:*' hosts $h
+	fi
+	# Force gsed usage if installed
+	if command -v gsed 1>/dev/null 2>&1; then
+		alias sed=gsed
 	fi
 fi
