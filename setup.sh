@@ -327,7 +327,7 @@ if [ $SETUP_PKG -eq 1 ]; then
 	sudo "${PKG_INSTALL[@]}" "${PKGS[@]}" 2>> "$LOG_FILE" || error "Errors occured during packages installation"
 	[ "${#AUR_PKGS}" -ne 0 ] && "${AUR_INSTALL[@]}" "${AUR_PKGS[@]}" 2>> "$LOG_FILE" || error "Errors occured during packages installation"
 
-	[[ "$OSTYPE" =~ ^darwin.* ]] && [ $SETUP_VIM -eq 1 ] && pip3 install git+git://github.com/powerline/powerline
+	[[ "$OSTYPE" =~ ^darwin.* ]] && [ $SETUP_VIM -eq 1 ] && pip3 install git+https://github.com/powerline/powerline
 fi
 
 msg "Cloning repositories..."
