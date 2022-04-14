@@ -146,22 +146,13 @@ bindsym $mod+Shift+equal move container to workspace $workspace12
 bindsym $mod+m move workspace to output right
 
 # Floating windows
-# Eye of Gnome(image viewer)
-for_window [class="Eog"] floating enable
 # Gnome Calculator
 for_window [class="Gnome-calculator"] floating enable
 # Pavucontrol(sound control)
 for_window [class="Pavucontrol"] floating enable
-# Remmina(remote desktop client)
-for_window [class="Remmina"] floating enable
-# Skype
-for_window [class="Skype"] floating enable
 # Thunar(file manager)
 for_window [class="Thunar"] floating enable
 
-# Fix Remmina windows size
-for_window [class="Remmina"] resize set 1280 720
-for_window [class="Remmina" title="Remmina Remote Desktop Client"] resize set 480 640
 # Hack for spotify
 for_window [class="Spotify"] move to workspace $workspace12
 
