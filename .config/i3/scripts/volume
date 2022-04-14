@@ -1,16 +1,15 @@
 #!/bin/bash
-sink=$(pacmd list-sinks | sed -n -E 's/.*\*\s+index:\s([0-9]+)/\1/p')
-
+sink="$(pactl get-default-sink)"
 
 if [ -z "$1" ]; then
 	if [[ ${BLOCK_BUTTON:-0} == 1 ]]; then
 		$0 mute
 	fi
-	mute=$(pacmd list-sinks | sed -n -E '/index: '"$sink"'/,/index:/s/.*muted:\s([yes|no])/\1/p')
+	mute=$(pactl get-sink-mute "$sink" | sed -n -E 's/Mute:\s([yes|no])/\1/p')
 	if [[ $mute == yes ]]; then
 		echo " Mute"
 	else
-		echo " $(pacmd list-sinks | sed -n -E '/index: '"$sink"'/,/index:/s/^\s+volume:.*\s+([0-9]+%).*$/\1/p')"
+		echo " $(pactl get-sink-volume "$sink" | sed -n -E 's@^Volume:\s[^/]+/\s*([0-9]+%)\s+.*@\1@p')"
 	fi
 else
 	case "$1" in
