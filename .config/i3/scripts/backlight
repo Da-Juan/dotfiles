@@ -1,8 +1,8 @@
 #!/bin/bash
 # Increase/Decrease step
-STEP=400
+STEP=12
 
-BRIGHTNESSDIR="/sys/class/backlight/intel_backlight"
+BRIGHTNESSDIR="/sys/class/backlight/amdgpu_bl0"
 
 if [[ ! -d "$BRIGHTNESSDIR" ]]; then
 	exit 1
