@@ -147,7 +147,7 @@ bindsym $mod+m move workspace to output next
 
 # Floating windows
 # Gnome Calculator
-for_window [class="Gnome-calculator"] floating enable
+for_window [class="gnome-calculator"] floating enable
 # Pavucontrol(sound control)
 for_window [class="Pavucontrol"] floating enable
 # Thunar(file manager)
