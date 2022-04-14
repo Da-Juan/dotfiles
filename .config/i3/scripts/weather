@@ -1,5 +1,17 @@
 #!/bin/bash
-WEATHER="$(curl -s "wttr.in/?format=%c%20%t%o")"
-if [[ "${#WEATHER}" -lt 16 && ! "$WEATHER" =~ ^Unknown.*$ ]]; then
-	echo "$WEATHER"
+base_url="https://wttr.in"
+query_string="?format=%c%20%t%o"
+
+if [ -f "$HOME"/.local_vars ]; then
+	source "$HOME"/.local_vars
+fi
+
+url="$base_url/$query_string"
+if nmcli --get-values name connection show --active | grep -q "${home_ssid-}"; then
+	url="$base_url/$weather_default_location$query_string"
+fi
+
+weather="$(curl -s "$url")"
+if [[ "${#weather}" -lt 16 && ! "$weather" =~ ^Unknown.*$ ]]; then
+	echo "$weather"
 fi
