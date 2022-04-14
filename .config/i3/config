@@ -161,21 +161,8 @@ assign [class="firefox"] $workspace11
 assign [class="Spotify"] $workspace12
 
 # workspace default monitors
-set $screen-left	eDP-1
-set $screen-center	DP-1
-set $screen-right	DP2-3
-workspace $workspace1 output $screen-left
-workspace $workspace2 output $screen-left
-workspace $workspace3 output $screen-center
-workspace $workspace4 output $screen-center
-workspace $workspace5 output $screen-center
-workspace $workspace6 output $screen-center
-workspace $workspace7 output $screen-center
-workspace $workspace8 output  $screen-right
-workspace $workspace9 output  $screen-right
-workspace $workspace10 output $screen-right
-workspace $workspace11 output $screen-right
-workspace $workspace12 output $screen-right
+set $screen-primary	eDP-1
+set $screen-secondary	DP-1
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -247,8 +234,7 @@ bindsym $mod+space exec zsh -c "rofi -show run"
 
 # startup
 # Screens management with xrandr and set the wallpaper with feh
-exec_always --no-startup-id "xrandr --output $screen-left --mode 1920x1080 --pos 0x0 --rotate normal --output $screen-center --mode 2560x1440 --pos 1920x0 --rotate normal --output $screen-right --mode 1920x1080 --pos 4480x0 --rotate normal; feh --bg-scale $wallpaper"
-#exec --no-startup-id chromium-browser
+exec_always --no-startup-id "xrandr --output $screen-primary --mode 1920x1080 --pos 0x0 --rotate normal --output $screen-secondary --mode 2560x1440 --above $screen-primary --rotate normal; feh --bg-scale $wallpaper"
 # Picom for Rofi transparency
 # NetworkManager applet
 exec --no-startup-id nm-applet
