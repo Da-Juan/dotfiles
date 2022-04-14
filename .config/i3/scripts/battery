@@ -5,13 +5,13 @@ ACPI="$(acpi -b | grep "Battery $BATTERY")"
 if [[ -z "$ACPI" ]]; then
 	exit
 fi
-read -r STATUS PERCENT TIME <<< "$(echo "$ACPI" | sed -r "s/^Battery 0: (Full|(Dis)?[Cc]harging|Unknown), ([0-9]+)%(, ([0-9]+:[0-9]+:[0-9]+))?.*/\1 \3 \5/")"
+read -r STATUS PERCENT TIME <<< "$(echo "$ACPI" | sed -r "s/Not charging/Not_charging/;s/^Battery 0: (Full|(Not_|Dis)?[Cc]harging|Unknown), ([0-9]+)%(, ([0-9]+:[0-9]+:[0-9]+))?.*/\1 \3 \5/")"
 
 TEXT=""
 SHORT=""
 COLOR=""
 
-if [[ "$STATUS" == "Discharging" ]]; then
+if [[ "$STATUS" =~ (Not_|Dis)charging ]] ; then
 	if [[ $PERCENT -le 100 && $PERCENT -gt 80 ]]; then
 		SHORT="\xef\x89\x80\x20"
 	elif [[ $PERCENT -le 80 && $PERCENT -gt 60 ]]; then
