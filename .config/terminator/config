@@ -1,28 +1,18 @@
 [global_config]
-  enabled_plugins = InactivityWatch, ActivityWatch, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
   focus = mouse
   handle_size = 1
   title_hide_sizetext = True
   title_transmit_bg_color = "#d30102"
+  enabled_plugins = InactivityWatch, ActivityWatch, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
 [keybindings]
-  broadcast_all = None
-  broadcast_group = None
   close_term = None
   close_window = None
   group_all = None
   group_tab = None
+  broadcast_group = None
+  broadcast_all = None
   insert_number = None
   insert_padded = None
-[layouts]
-  [[default]]
-    [[[child1]]]
-      parent = window0
-      profile = default
-      type = Terminal
-    [[[window0]]]
-      parent = ""
-      type = Window
-[plugins]
 [profiles]
   [[default]]
     audible_bell = True
@@ -30,11 +20,11 @@
     background_darkness = 0.8
     cursor_color = "#eee8d5"
     font = FontAwesome 10
-    force_no_bell = True
     foreground_color = "#eee8d5"
-    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#586e75:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
-    scrollback_lines = 10000
     scrollbar_position = hidden
+    scrollback_lines = 10000
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#586e75:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    force_no_bell = True
   [[solarized-dark]]
     background_color = "#002b36"
     cursor_color = "#eee8d5"
@@ -45,3 +35,13 @@
     cursor_color = "#002b36"
     foreground_color = "#002b36"
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
