@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if [[ ${BLOCK_BUTTON:-0} == 1 ]]; then
+	dunstctl set-paused toggle
+fi
+icon=""
+color=""
+if [ "$(dunstctl is-paused)" == "true" ]; then
+	icon=""
+	color="#cb4b16"
+fi
+
+echo "$icon"
+echo "$icon"
+echo "$color"
