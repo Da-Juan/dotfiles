@@ -34,6 +34,11 @@ if command -v pyenv 1>/dev/null 2>&1; then
 	eval "$(pyenv init -)"
 fi
 
+# krew
+if [ -d "${KREW_ROOT:-$HOME/.krew}" ]; then
+	export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+fi
+
 export GPG_TTY="$(tty)"
 
 export TODAY="$(date +"%Y%m%d")"
