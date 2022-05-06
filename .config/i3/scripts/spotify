@@ -8,6 +8,10 @@ SP_DEST="org.mpris.MediaPlayer2.spotify"
 SP_PATH="/org/mpris/MediaPlayer2"
 SP_MEMB="org.mpris.MediaPlayer2.Player"
 
+if ! dbus-send --print-reply --dest=org.freedesktop.DBus  /org/freedesktop/DBus org.freedesktop.DBus.ListNames | grep -q "$SP_DEST"; then
+	exit
+fi
+
 SPOTIFY_METADATA="$(dbus-send                                                \
  --print-reply                                  `# We need the reply.`       \
  --dest=$SP_DEST                                                             \
