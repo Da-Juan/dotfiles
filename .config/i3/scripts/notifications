@@ -12,4 +12,6 @@ fi
 
 echo "$icon"
 echo "$icon"
-echo "$color"
+if [[ -n "$color" ]]; then
+	echo "$color"
+fi
