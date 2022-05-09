@@ -7,7 +7,15 @@ revert() {
 		xset dpms 60 60 60
 	fi
 }
-dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop
+
+# If Spotify is running, stop playback
+sp_dest="org.mpris.MediaPlayer2.spotify"
+sp_path="/org/mpris/MediaPlayer2"
+sp_memb="org.mpris.MediaPlayer2.Player"
+if dbus-send --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.ListNames | grep -q "$sp_dest"; then
+	dbus-send --type=method_call --dest="$sp_dest" "$sp_path" "$sp_memb".Stop
+fi
+
 dunstctl set-paused true
 trap revert HUP INT TERM
 xset +dpms dpms 30 30 30 
