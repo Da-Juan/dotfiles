@@ -8,7 +8,7 @@ revert() {
 	fi
 }
 dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop
-killall -SIGUSR1 dunst
+dunstctl set-paused true
 trap revert HUP INT TERM
 xset +dpms dpms 30 30 30 
 WALLPAPER=$(~/.config/i3/scripts/lockscreen_wallpaper "$1")
@@ -18,4 +18,4 @@ else
 	i3lock --no-unlock-indicator --tiling --image="$WALLPAPER" --nofork
 fi
 revert
-killall -SIGUSR2 dunst
+dunstctl set-paused false
