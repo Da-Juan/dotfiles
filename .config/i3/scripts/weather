@@ -1,6 +1,6 @@
 #!/bin/bash
 base_url="https://wttr.in"
-query_string="?format=%c%20%t%o"
+query_string="?format=%c%t"
 
 if [ -f "$HOME"/.local_vars ]; then
 	source "$HOME"/.local_vars
