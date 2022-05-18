@@ -1,15 +1,42 @@
 #!/bin/bash
 sink="$(pactl get-default-sink)"
 
+notify=0
+if command -v dunstify > /dev/null; then
+	notify=1
+fi
+
+function get_volume {
+	local s="${1:?'Sink is required'}"
+	pactl get-sink-volume "$s" | sed -n -E 's@^Volume:\s[^/]+/\s*([0-9]+)%\s+.*@\1@p'
+}
+
+function is_muted {
+	local s="${1:?'Sink is required'}"
+	pactl get-sink-mute "$s" | sed -n -E 's/Mute:\s([yes|no])/\1/p'
+}
+
+function send_notification {
+	local s="${1:?'Sink is required'}"
+	v="$(get_volume "$s")"
+	args=("-t" "1500" "-h" "int:transient:1" "-h" "string:x-dunst-stack-tag:volume")
+	if [ "$(is_muted "$s")" == "yes" ]; then
+		summary="Muted"
+	else
+		args+=("-h" "int:value:$v")
+		summary="${v}%"
+	fi
+	dunstify "${args[@]}" "Volume" "$summary"
+}
+
 if [ -z "$1" ]; then
 	if [[ ${BLOCK_BUTTON:-0} == 1 ]]; then
 		$0 mute
 	fi
-	mute=$(pactl get-sink-mute "$sink" | sed -n -E 's/Mute:\s([yes|no])/\1/p')
-	if [[ $mute == yes ]]; then
+	if [ "$(is_muted "$sink")" == "yes" ]; then
 		echo " Mute"
 	else
-		echo " $(pactl get-sink-volume "$sink" | sed -n -E 's@^Volume:\s[^/]+/\s*([0-9]+%)\s+.*@\1@p')"
+		echo " $(get_volume "$sink")%"
 	fi
 else
 	case "$1" in
@@ -23,4 +50,5 @@ else
 			pactl set-sink-mute "$sink" toggle
 			;;
 	esac
+	[ "$notify" -eq 1 ] &&  send_notification "$sink"
 fi

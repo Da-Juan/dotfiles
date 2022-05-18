@@ -246,5 +246,10 @@
     foreground = "#1ED760"
     background = "#121212"
 
+[volume]
+    appname = dunstify
+    summary = "Volume*"
+    format = "%s > %b"
+    highlight = "#cccccc"
 
 # vim: ft=cfg syntax=cfg
