@@ -246,40 +246,5 @@
     foreground = "#1ED760"
     background = "#121212"
 
-[problem_ignore]
-    appname = Thunderbird
-    body = "\*\* PROBLEM*"
-    history_ignore = true
-    format = ""
-
-[recovery_ignore]
-    appname = Thunderbird
-    body = "\*\* RECOVERY*"
-    history_ignore = true
-    format = ""
-
-[host_up_ignore]
-    appname = Thunderbird
-    body = "Host UP*"
-    history_ignore = true
-    format = ""
-
-[host_down_ignore]
-    appname = Thunderbird
-    body = "Host DOWN*"
-    history_ignore = true
-    format = ""
-
-[bacula_ignore]
-    appname = Thunderbird
-    body = "Bacula *"
-    history_ignore = true
-    format = ""
-
-[unattended_upgrades_ignore]
-    appname = Thunderbird
-    body = "* unattended-upgrades *"
-    history_ignore = true
-    format = ""
 
 # vim: ft=cfg syntax=cfg
