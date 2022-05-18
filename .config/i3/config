@@ -234,7 +234,7 @@ bindsym $mod+space exec zsh -c "rofi -show run"
 
 # startup
 # Screens management with xrandr and set the wallpaper with feh
-exec_always --no-startup-id "xrandr --output $screen-primary --mode 1920x1080 --pos 0x0 --rotate normal --output $screen-secondary --mode 2560x1440 --above $screen-primary --rotate normal; feh --bg-scale $wallpaper"
+exec_always --no-startup-id "xrandr --output $screen-primary --mode 1920x1080 --pos 0x0 --rotate normal --output $screen-secondary --mode 2560x1440 --right-of $screen-primary --rotate normal; feh --bg-scale $wallpaper"
 # Picom for Rofi transparency
 # NetworkManager applet
 exec --no-startup-id nm-applet
