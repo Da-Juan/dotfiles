@@ -69,6 +69,8 @@ if has("mac")
 	set backspace=2
 endif
 
+let g:vim_virtualenv = '~/.virtualenvs/vim'
+
 """""""""""""""
 " Color theme "
 """""""""""""""
@@ -96,7 +98,7 @@ function StartPowerline()
 endfunction
 
 function GetPythonVersion()
-  let g:python_version = substitute(system("python3 -V"), '^python \([0-9]\+\.[0-9]\+\)\(\.[0-9]\+\)\?.*\c', '\1', '')
+  let g:python_version = substitute(system(g:vim_virtualenv . "/bin/python3 -V"), '^python \([0-9]\+\.[0-9]\+\)\(\.[0-9]\+\)\?.*\c', '\1', '')
 endfunction
 
 call GetPythonVersion()
@@ -155,7 +157,7 @@ vnoremap <space> zf
 """""""""
 " Black "
 """""""""
-let g:black_virtualenv = '~/.virtualenvs/black'
+let g:black_virtualenv = g:vim_virtualenv
 
 " autocmd BufWritePre *.py execute ':Black'
 "

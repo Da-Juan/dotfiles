@@ -163,11 +163,11 @@ function setup_vim {
 		cd - > /dev/null || return
 	fi
 
-	black_venv_path="$HOME/.virtualenvs/black"
-	if [ "$SETUP_PYTHON" -eq 1 ] && [ ! -d "$black_venv_path" ]; then
-		python3 -m venv "$black_venv_path"
+	vim_venv_path="$HOME/.virtualenvs/vim"
+	if [ "$SETUP_PYTHON" -eq 1 ] && [ ! -d "$vim_venv_path" ]; then
+		python3 -m venv "$vim_venv_path"
 	fi
-	"$black_venv_path"/bin/pip install black
+	"$vim_venv_path"/bin/pip install black powerline-status
 }
 
 function setup_links {
@@ -282,13 +282,13 @@ if [ $SETUP_PKG -eq 1 ]; then
 			"arch")
 				TOOLS+=("the_silver_searcher")
 				PYTHON=("python" "python-pip")
-				VIM+=("powerline-fonts" "python" "python-powerline" "vim")
+				VIM+=("powerline-fonts" "python" "vim")
 				I3+=("arc-gtk-theme" "python" "python-pillow")
 				;;
 			"debian")
 				TOOLS+=("silversearcher-ag")
 				PYTHON=("python3" "python3-dev" "python3-pip" "python3-venv")
-				VIM+=("fonts-powerline" "python3" "python3-powerline" "vim-nox")
+				VIM+=("fonts-powerline" "python3" "vim-nox")
 				I3+=("arc-theme" "python3" "python3-pil")
 				;;
 			*)
@@ -326,8 +326,6 @@ if [ $SETUP_PKG -eq 1 ]; then
 	msg "Installing packages..."
 	sudo "${PKG_INSTALL[@]}" "${PKGS[@]}" 2>> "$LOG_FILE" || error "Errors occured during packages installation"
 	[ "${#AUR_PKGS}" -ne 0 ] && "${AUR_INSTALL[@]}" "${AUR_PKGS[@]}" 2>> "$LOG_FILE" || error "Errors occured during packages installation"
-
-	[[ "$OSTYPE" =~ ^darwin.* ]] && [ $SETUP_VIM -eq 1 ] && pip3 install git+https://github.com/powerline/powerline
 fi
 
 msg "Cloning repositories..."
