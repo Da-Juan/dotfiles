@@ -107,6 +107,9 @@ fi
 # kubectl completion
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
+# flux
+[[ $commands[flux] ]] && source <(flux completion zsh)
+
 if [[ "$(uname -s)" == "Darwin" ]]; then
 	h=()
 	# SSH hostname completion for Mac OS X
