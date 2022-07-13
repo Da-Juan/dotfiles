@@ -19,6 +19,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'psf/black'
+Plugin 'Yggdroot/indentLine'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -233,3 +234,10 @@ map <F6> :HighlightRepeats<CR>
 """""""""""""""""""
 
 command! Tl normal a <!-- .element class="text-left" -->
+
+""""""""""""""
+" IndentLine "
+""""""""""""""
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+"let g:vim_json_conceal=0
+"let g:markdown_syntax_conceal=0
