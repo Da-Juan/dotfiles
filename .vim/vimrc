@@ -170,8 +170,8 @@ nnoremap <F11> :Black<CR>
 let g:pymode_python = 'python3'
 
 " Python 120 characters line length
-let g:pymode_options_max_line_length=89
-autocmd FileType python set colorcolumn=89
+let g:pymode_options_max_line_length=120
+autocmd FileType python set colorcolumn=120
 
 " Highlight trailing spaces
 highlight BadWhitespace ctermfg=16 ctermbg=166 guifg=#000000 guibg=#d75f00
