@@ -78,7 +78,7 @@ read -r -a old < "${path}"
 time_diff=$(( time - old[0] ))
 
 # sanity check: has a positive amount of time passed
-[[ "${time_diff}" -gt 0 ]] || exit
+[[ "${time_diff}" -le 0 ]] && exit
 echo "${time} ${rx} ${tx}" > "${path}"
 
 # calc bytes transferred, and their rate in byte/s
