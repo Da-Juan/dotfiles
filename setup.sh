@@ -144,6 +144,8 @@ function setup_ohmyzsh {
 		remote="https://github.com/zsh-users/${plugin}.git"
 		git_clone_or_pull "$remote" "$zsh_plugins_path/$plugin"
 	done
+	git_clone_or_pull https://github.com/reegnz/jq-zsh-plugin.git "$zsh_plugins_path"
+
 	return 0
 }
 
