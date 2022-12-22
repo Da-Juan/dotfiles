@@ -105,7 +105,10 @@ if [[ -f $HOME/.profile ]]; then
 fi
 
 # kubectl completion
-[[ $commands[kubectl] ]] && source <(kubectl completion zsh)
+if [[ $commands[kubectl] ]]; then
+	alias k=kubectl
+	source <(k completion zsh)
+fi
 
 # flux
 [[ $commands[flux] ]] && source <(flux completion zsh)
