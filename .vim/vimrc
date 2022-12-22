@@ -45,7 +45,7 @@ autocmd BufNewFile,BufRead,VimEnter * if &ft == '' | set nonumber | endif
 set number			" show line numbers
 
 				" toggle line numbering
-nnoremap <F3> :set nonumber!<CR>
+nnoremap <F3> :set nonumber! colorcolumn=<CR> \| :GitGutterBufferToggle<CR> \| :IndentLinesToggle<CR>
 imap <F3> <C-O><F3>
 
 " set cursorcolumn		" highlight the cursor's column
