@@ -239,5 +239,5 @@ command! Tl normal a <!-- .element class="text-left" -->
 " IndentLine "
 """"""""""""""
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-"let g:vim_json_conceal=0
-"let g:markdown_syntax_conceal=0
+let g:vim_json_conceal=0
+let g:markdown_syntax_conceal=0
