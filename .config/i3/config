@@ -252,3 +252,8 @@ bindsym $mod+F12 exec --no-startup-id ~/.config/i3/scripts/volume up
 # Backlight key bindings
 bindsym XF86MonBrightnessUp exec ~/.config/i3/scripts/backlight +
 bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/backlight -
+
+# Focused window screenshot
+bindsym $mod+Shift+w exec scrot '/tmp/screencap_%Y%m%d-%H%M%S_$wx$h.png' -u -e 'xclip -selection clipboard -target image/png -i $f'
+# Selection screenshot
+bindsym --release $mod+Shift+s exec scrot '/tmp/screencap_%Y%m%d-%H%M%S_$wx$h.png' -s -e 'xclip -selection clipboard -target image/png -i $f'
