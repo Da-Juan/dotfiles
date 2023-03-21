@@ -259,7 +259,7 @@ query_yes_no "--default" "y" "Setup vim?" && SETUP_VIM=1
 # Packages installation
 if [ $SETUP_PKG -eq 1 ]; then
 	PREREQUISITES=("git")
-	TOOLS=("zsh" "htop" "httpie" "ncdu" "shellcheck" "tig" "xclip")
+	TOOLS=("zsh" "htop" "httpie" "ncdu" "ripgrep" "shellcheck" "tig" "xclip")
 
 	if [ "$OSTYPE" = "linux-gnu" ]; then
 		# Default to Debian type OS
@@ -287,13 +287,13 @@ if [ $SETUP_PKG -eq 1 ]; then
 		VIM=("cmake" "make" "gcc" "powerline")
 		case "$DISTRO" in
 			"arch")
-				TOOLS+=("the_silver_searcher")
+				TOOLS+=("starship")
 				PYTHON=("python" "python-pip")
 				VIM+=("powerline-fonts" "python" "vim")
 				I3+=("arc-gtk-theme" "python" "python-pillow")
 				;;
 			"debian")
-				TOOLS+=("silversearcher-ag")
+				#TODO: Add starship install
 				PYTHON=("python3" "python3-dev" "python3-pip" "python3-venv")
 				VIM+=("fonts-powerline" "python3" "vim-nox")
 				I3+=("arc-theme" "python3" "python3-pil")
@@ -308,7 +308,7 @@ if [ $SETUP_PKG -eq 1 ]; then
 		PKG_UPDATE=("$PKG_MANAGER" "update")
 		PKG_INSTALL=("$PKG_MANAGER" "install")
 
-		TOOLS+=("the_silver_searcher")
+		TOOLS+=("starship")
 		PYTHON=("python")
 		VIM=("vim")
 	fi
