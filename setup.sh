@@ -179,8 +179,13 @@ function setup_links {
 	shift
 	local links=("$@")
 	for link in "${links[@]}"; do
+		sub_dirs="$(dirname "$link" | sed -E 's/^\.$//')"
+		file_name="$(basename "$link")"
+		if [ -n "$sub_dirs" ] && [ ! -e "$dest_dir/$sub_dirs" ]; then
+			mkdir -p "$dest_dir/$sub_dirs"
+		fi
 		if [ ! -e "$dest_dir/$link" ]; then
-			ln -s "$src_dir/$link" "$dest_dir/"
+			ln -s "$src_dir/$link" "$dest_dir/$sub_dirs/$file_name"
 			continue
 		fi
 		if [ -L "$dest_dir/$link" ] && [ "$(readlink -f "$dest_dir/$link")" = "$src_dir/$link" ]; then
@@ -347,7 +352,7 @@ if [ -d "$CLONE_DIR/dotfiles"  ]; then
 		LINKS=(".aliases")
 		[ $SETUP_ZSH -eq 1 ] && LINKS+=(".zshenv" ".zshrc")
 		[ $SETUP_VIM -eq 1 ] && LINKS+=(".vim")
-		[ $SETUP_I3 -eq 1 ] && LINKS+=(".fonts" ".xsessionrc")
+		[ $SETUP_I3 -eq 1 ] && LINKS+=(".local/share/fonts" ".xsessionrc")
 		setup_links "$CLONE_DIR/dotfiles" "$HOME" "${LINKS[@]}"
 
 		# Links in $HOME/.config
