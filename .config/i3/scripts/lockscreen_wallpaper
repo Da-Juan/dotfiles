@@ -17,7 +17,7 @@ SIZES_CACHE_FILE = os.path.join(OUTPUT_DIR, "lock_wallpaper.sizes")
 WALLPAPER_TTL = 24 * 60 * 60
 
 
-class Screen():
+class Screen:
     """
     Screen class.
 
@@ -95,9 +95,22 @@ def resize(source_image: Image.Image, size: Tuple[int, int]) -> Image.Image:
 
     """
     source_image_ratio = ratio(*source_image.size)
-    if source_image_ratio != ratio(*size):
-        size = (size[0], int(size[0] / source_image_ratio))
-    new_image = source_image.resize(size)
+    screen_ratio = ratio(*size)
+    if screen_ratio >= 1:
+        if source_image_ratio != screen_ratio:
+            size = (size[0], int(size[0] / source_image_ratio))
+        new_image = source_image.resize(size)
+    else:
+        new_size = (int(size[1] * ratio(*size[::-1])), size[1])
+        temp_image = source_image.resize(new_size)
+        new_image = temp_image.crop(
+            (
+                int(temp_image.size[0] / 2 - size[0] / 2),
+                0,
+                int(temp_image.size[0] / 2 + size[0] / 2),
+                size[1],
+            )
+        )
     return new_image
 
 

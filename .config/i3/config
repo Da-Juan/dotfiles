@@ -92,9 +92,9 @@ bindsym $mod+Shift+x exec ~/.config/i3/scripts/lockscreen $wallpaper
 
 set $workspace1 "1 "
 set $workspace2 "2 "
-set $workspace3 "3 "
-set $workspace4 "4 "
-set $workspace5 "5"
+set $workspace3 "3 "
+set $workspace4 "4 "
+set $workspace5 "5 "
 set $workspace6 "6"
 set $workspace7 "7"
 set $workspace8 "8"
@@ -152,6 +152,12 @@ assign [class="Spotify"] $workspace12
 # workspace default monitors
 set $screen-primary	eDP-1
 set $screen-secondary	DP-1
+set $screen-vertical	HDMI-1
+
+workspace $workspace1 output $screen-primary
+workspace $workspace2 output $screen-secondary
+workspace $workspace3 output $screen-secondary
+workspace $workspace4 output $screen-vertical
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -221,7 +227,8 @@ bindsym $mod+space exec zsh -c "rofi -show run"
 
 # startup
 # Screens management with xrandr and set the wallpaper with feh
-exec_always --no-startup-id "xrandr --output $screen-primary --mode 1920x1080 --pos 0x0 --rotate normal --output $screen-secondary --mode 2560x1440 --right-of $screen-primary --rotate normal; feh --bg-scale $wallpaper"
+# exec_always --no-startup-id "xrandr --output $screen-primary --mode 1920x1080 --pos 0x0 --rotate normal --output $screen-secondary --mode 2560x1440 --above $screen-primary --rotate normal --output $screen-vertical --mode 2560x1440 --right-of $screen-secondary --rotate right; feh --bg-scale $wallpaper"
+exec_always --no-startup-id "xrandr --output $screen-primary --mode 1920x1080 --pos 0x0 --rotate normal --output $screen-secondary --mode 2560x1440 --above $screen-primary --rotate normal --output $screen-vertical --mode 2560x1440 --right-of $screen-secondary --rotate right; .config/i3/scripts/wallpaper"
 # Picom for Rofi transparency
 # NetworkManager applet
 exec --no-startup-id nm-applet
@@ -248,6 +255,10 @@ bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/scripts/volume do
 bindsym $mod+F11 exec --no-startup-id ~/.config/i3/scripts/volume down
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/scripts/volume up
 bindsym $mod+F12 exec --no-startup-id ~/.config/i3/scripts/volume up
+
+# Microphone push to talk
+# bindcode           179 exec pactl set-source-mute @DEFAULT_SOURCE@ no
+# bindcode --release 179 exec pactl set-source-mute @DEFAULT_SOURCE@ yes
 
 # Backlight key bindings
 bindsym XF86MonBrightnessUp exec ~/.config/i3/scripts/backlight +
