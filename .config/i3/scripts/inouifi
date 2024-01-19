@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+gps_url="https://wifi.sncf/router/api/train/gps"
+
+if nmcli -t connection show --active | grep -q "_SNCF_WIFI_INOUI"; then
+	speed="$(curl --silent --connect-timeout 10 "$gps_url" | jq -r '.speed')"
+	if [ "$speed" == "" ]; then
+		exit 1
+	fi
+	speed_kmh="$(echo "$speed * 3.6" | bc)"
+	printf " %.0f km/h\n" "$speed_kmh"
+	printf "%.0f" "$speed_kmh"
+fi
