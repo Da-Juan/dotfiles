@@ -1,46 +1,212 @@
-#!/bin/bash
-BATTERY="${1:-0}"
+#!/usr/bin/env python3
 
-ACPI="$(acpi -b | grep "Battery $BATTERY")"
-if [[ -z "$ACPI" ]]; then
-	exit
-fi
-read -r STATUS PERCENT TIME <<< "$(echo "$ACPI" | sed -r "s/Not charging/Not_charging/;s/^Battery 0: (Full|(Not_|Dis)?[Cc]harging|Unknown), ([0-9]+)%(, ([0-9]+:[0-9]+:[0-9]+))?.*/\1 \3 \5/")"
+import json
+import sys
+from pathlib import Path
 
-TEXT=""
-SHORT=""
-COLOR=""
 
-if [[ "$STATUS" =~ (Not_|Dis)charging ]] ; then
-	if [[ $PERCENT -le 100 && $PERCENT -gt 80 ]]; then
-		SHORT="\xef\x89\x80\x20"
-	elif [[ $PERCENT -le 80 && $PERCENT -gt 60 ]]; then
-		SHORT="\xef\x89\x81\x20"
-	elif [[ $PERCENT -le 60 && $PERCENT -gt 40 ]]; then
-		SHORT="\xef\x89\x82\x20"
-	elif [[ $PERCENT -le 40 && $PERCENT -gt 20 ]]; then
-		SHORT="\xef\x89\x83\x20"
-		COLOR="#b58900"
-	elif [[ $PERCENT -le 20 && $PERCENT -gt 0 ]]; then
-		SHORT="\xef\x89\x84\x20"
-		COLOR="#dc322f"
-	fi
-elif [[ "$STATUS" == "Charging" ]]; then
-	SHORT="\xef\x87\xa6\x20"
-elif [[ "$STATUS" == "Full" ]]; then
-	SHORT="\xef\x89\x80\x20"
-elif [[ "$STATUS" == "Unknown" ]]; then
-	SHORT="\xef\x89\x80\x20"
-else
-	exit
-fi
-SHORT+=" ${PERCENT}%"
-TEXT="$SHORT"
-if [[ -n "$TIME" ]]; then
-	TEXT+=" ($TIME)"
-fi
-echo -e "$TEXT"
-echo -e "$SHORT"
-if [[ -n "$COLOR" ]]; then
-	echo "$COLOR"
-fi
+class Battery:
+    """
+    Battery stats
+    """
+
+    def __init__(self, path: str = "/sys/class/power_supply", name: str = "BAT0") -> None:
+        self.path = Path(path) / name
+        self.name = name
+        self._update()
+
+    def __str__(self) -> str:
+        self._update()
+        return str(self.capacity)
+
+    def __repr__(self) -> str:
+        self._update()
+        return json.dumps(self, default=lambda o: str(o) if isinstance(o, Path) else o.__dict__)
+
+    def _get_stat(self, stat: Path) -> str:
+        """
+        Read stat from the Linux kernel
+        """
+        try:
+            return stat.read_text(encoding="ascii").strip()
+        except Exception:  # pylint: disable=broad-except
+            return ""
+
+    def _update(self):
+        """
+        Update the stats
+        """
+        # Get all files in the battery system folder
+        stats = [f for f in self.path.iterdir() if f.is_file()]
+        for stat in stats:
+            value = self._get_stat(stat)
+            try:
+                # Try to convert to integer
+                value = int(value)
+            except ValueError:
+                # Not possible, not a problem
+                pass
+            setattr(self, f"_{stat.name}", value)
+
+    @property
+    def capacity(self) -> int:
+        if not hasattr(self, "_capacity") and hasattr(self, "_charge_full") and hasattr(self, "_charge_now"):
+            return int(self._charge_now * 100 / self._charge_full)
+
+        return self._capacity  # pylint: disable=no-member
+
+    @property
+    def design_capacity(self):
+        if hasattr(self, "_charge_full_design"):
+            return self._charge_full_design
+
+        if self.voltage != -1:
+            return self.design_capacity_unit * 1000 / self.voltage
+
+        return self.design_capacity_unit
+
+    @property
+    def design_capacity_unit(self) -> float:
+        if hasattr(self, "_energy_full_design"):
+            return self._energy_full_design / 1000
+
+        return -1
+
+    @property
+    def last_capacity(self) -> float:
+        if hasattr(self, "_charge_full"):
+            return self._charge_full
+
+        # convert energy values (in mWh) to charge values (in mAh) if needed and possible
+        if self.voltage != -1:
+            return self.last_capacity_unit * 1000 / self.voltage
+
+        return self.last_capacity_unit
+
+    @property
+    def last_capacity_unit(self) -> float:
+        if hasattr(self, "_energy_full"):
+            return self._energy_full / 1000
+
+        return -1
+
+    @property
+    def percentage(self) -> int:
+        percentage = int(self.remaining_capacity * 100 / self.last_capacity)
+        return min(percentage, 100)
+
+    @property
+    def present_rate(self) -> float:
+        if hasattr(self, "_present_rate"):
+            return self._present_rate
+
+        if hasattr(self, "_current_now"):
+            return self._current_now / 1000
+
+        if hasattr(self, "_power_now"):
+            return self._power_now / 1000
+
+        return 0
+
+    @present_rate.setter
+    def present_rate(self, value):
+        self._present_rate = value
+
+    @property
+    def remaining_capacity(self) -> float:
+        if hasattr(self, "_charge_now"):
+            return self._charge_now / 1000
+
+        if self.voltage != -1:
+            self.present_rate = self.present_rate * 1000 / self.voltage
+            return self.remaining_energy * 1000 / self.voltage
+
+        return self.remaining_energy
+
+    @property
+    def remaining_energy(self) -> float:
+        if hasattr(self, "_energy_now"):
+            return self._energy_now / 1000
+
+        return -1
+
+    @property
+    def remaining_seconds(self) -> int:
+        if self.status == "Charging":
+            seconds = 3600 * (self.last_capacity - self.remaining_capacity) / self.present_rate
+        else:
+            seconds = 3600 * self.remaining_capacity / self.present_rate
+
+        return int(seconds)
+
+    @property
+    def status(self):
+        return self._status  # pylint: disable=no-member
+
+    @property
+    def voltage(self) -> float:
+        if hasattr(self, "_voltage"):
+            return self._voltage / 1000
+
+        return -1
+
+
+def convert_seconds(seconds: int) -> str:
+    if seconds < 0:
+        raise ValueError
+
+    hours = seconds / 3600
+    seconds -= 3600 * int(hours)
+    minutes = seconds / 60
+    seconds -= 60 * int(minutes)
+    return f"{int(hours):0{2}}:{int(minutes):0{2}}:{int(seconds):0{2}}"
+
+
+def main() -> None:
+    battery = Battery()
+
+    color = ""
+    short = ""
+    time = ""
+
+    match battery.status:
+        case "Full":
+            short = ""
+        case "Charging":
+            short = ""
+            time = convert_seconds(battery.remaining_seconds)
+        case "Discharging" | "Not charging":
+            if battery.percentage > 80:
+                short = ""
+            elif battery.percentage > 60:
+                short = ""
+            elif battery.percentage > 40:
+                short = ""
+            elif battery.percentage > 20:
+                short = ""
+                color = "#b58900"
+            else:
+                short = ""
+                color = "#dc322f"
+            try:
+                time = convert_seconds(battery.remaining_seconds)
+            except ZeroDivisionError:
+                # Avoid division by zero when status is "Not charging"
+                pass
+        case "Unknown":
+            short = ""
+        case _:
+            sys.exit()
+
+    short += f" {battery.percentage}%"
+    text = short
+    if time:
+        text += f" ({time})"
+    print(text)
+    print(short)
+    if color:
+        print(color)
+
+
+if __name__ == "__main__":
+    main()
