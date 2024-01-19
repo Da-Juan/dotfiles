@@ -146,6 +146,7 @@ for_window [class="Thunar"] floating enable
 for_window [class="Spotify"] move to workspace $workspace12
 
 # default workspaces
+assign [class="Slack"] $workspace4
 assign [class="firefox"] $workspace11
 assign [class="Spotify"] $workspace12
 
