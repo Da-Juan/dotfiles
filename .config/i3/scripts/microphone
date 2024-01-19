@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+notify=0
+default_volume=125
+
+if command -v dunstify > /dev/null; then
+	notify=1
+fi
+
+function is_muted {
+	pactl get-source-mute @DEFAULT_SOURCE@ | sed -n -E 's/Mute:\s([yes|no])/\1/p'
+}
+
+function get_volume {
+	pactl get-source-volume @DEFAULT_SOURCE@ | sed -n -E 's@Volume:\s+[^/]+\s+/\s+([0-9]+)%\s+.*@\1@p'
+}
+
+function send_notification {
+	message="$*"
+
+	args=("-t" "1500" "-h" "int:transient:1" "-h" "string:x-dunst-stack-tag:microphone")
+	dunstify "${args[@]}" "Microphone" "$message"
+}
+
+case "${BLOCK_BUTTON:-0}" in
+	1)
+		pactl set-source-mute @DEFAULT_SOURCE@ toggle
+		message="$([ "$(is_muted)" == "yes" ] && echo "Muted" || echo "Open")"
+		[ "$notify" -eq 1 ] && send_notification "$message"
+		;;
+	3)	pactl set-source-volume @DEFAULT_SOURCE@ "$default_volume"%
+		message="Volume reset to ${default_volume}%"
+		[ "$notify" -eq 1 ] && send_notification "$message"
+		;;
+esac
+
+icon=""
+color=""
+if [ "$(get_volume)" -lt $default_volume ]; then
+	color="#f7ae0f"
+fi
+
+if [ "$(is_muted)" == "yes" ]; then
+	icon=""
+	color="#cb4b16"
+fi
+
+echo "$icon"
+echo "$icon"
+if [[ -n "$color" ]]; then
+	echo "$color"
+fi
