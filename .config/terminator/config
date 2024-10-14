@@ -1,8 +1,5 @@
 [global_config]
   focus = mouse
-  handle_size = 1
-  title_hide_sizetext = True
-  title_transmit_bg_color = "#d30102"
   enabled_plugins = InactivityWatch, ActivityWatch, LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
 [keybindings]
   close_term = None
@@ -18,21 +15,19 @@
     audible_bell = True
     background_color = "#002b36"
     background_darkness = 0.8
-    cursor_color = "#eee8d5"
-    font = FontAwesome 10
+    font = SauceCodePro Nerd Font Mono 11
     foreground_color = "#eee8d5"
+    show_titlebar = False
     scrollbar_position = hidden
     scrollback_lines = 100000
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#586e75:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     force_no_bell = True
   [[solarized-dark]]
     background_color = "#002b36"
-    cursor_color = "#eee8d5"
     foreground_color = "#eee8d5"
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#586e75:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
   [[solarized-light]]
     background_color = "#eee8d5"
-    cursor_color = "#002b36"
     foreground_color = "#002b36"
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
 [layouts]
