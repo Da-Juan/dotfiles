@@ -26,6 +26,11 @@ export PATH="$HOME/.local/bin:$PATH"
 # Snap's bin
 export PATH="$PATH:/var/lib/snapd/snap/bin"
 
+# Cargo's bin
+if [ -d "$HOME/.cargo/bin" ]; then
+	export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
 # pyenv 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
