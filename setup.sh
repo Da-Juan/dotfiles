@@ -22,6 +22,7 @@ fi
 SETUP_ZSH=0
 SETUP_PYTHON=0
 SETUP_VIM=0
+SETUP_NEOVIM=0
 SETUP_I3=0
 SETUP_PKG=1
 
@@ -253,6 +254,8 @@ query_yes_no "--default" "y" "Setup zsh and tools?" && SETUP_ZSH=1
 query_yes_no "--default" "y" "Install python?" && SETUP_PYTHON=1
 # vim
 query_yes_no "--default" "y" "Setup vim?" && SETUP_VIM=1
+# neovim
+query_yes_no "--default" "y" "Setup neovim?" && SETUP_NEOVIM=1
 # i3 (Linux only)
 [ "$OSTYPE" = "linux-gnu" ] && query_yes_no "--default" "y" "Setup i3wm?" && SETUP_I3=1
 
@@ -260,6 +263,7 @@ query_yes_no "--default" "y" "Setup vim?" && SETUP_VIM=1
 if [ $SETUP_PKG -eq 1 ]; then
 	PREREQUISITES=("git")
 	TOOLS=("zsh" "htop" "httpie" "ncdu" "ripgrep" "shellcheck" "tig" "xclip")
+	NEOVIM=("neovim")
 
 	if [ "$OSTYPE" = "linux-gnu" ]; then
 		# Default to Debian type OS
@@ -285,17 +289,20 @@ if [ $SETUP_PKG -eq 1 ]; then
 	    	)
 		I3_AUR=("moka-icon-theme-git" "faba-icon-theme-git")
 		VIM=("cmake" "make" "gcc" "powerline")
+		NEOVIM+=("npm")
 		case "$DISTRO" in
 			"arch")
 				TOOLS+=("starship")
 				PYTHON=("python" "python-pip")
 				VIM+=("powerline-fonts" "python" "vim")
+				NEOVIM+=("tree-sitter")
 				I3+=("arc-gtk-theme" "python" "python-pillow")
 				;;
 			"debian")
 				#TODO: Add starship install
 				PYTHON=("python3" "python3-dev" "python3-pip" "python3-venv")
 				VIM+=("fonts-powerline" "python3" "vim-nox")
+				NEOVIM+=("libtree-sitter0")
 				I3+=("arc-theme" "python3" "python3-pil")
 				;;
 			*)
@@ -311,6 +318,7 @@ if [ $SETUP_PKG -eq 1 ]; then
 		TOOLS+=("starship")
 		PYTHON=("python")
 		VIM=("vim")
+		NEOVIM+=("tree-sitter" "node")
 	fi
 
 	declare -a AUR_PKGS
@@ -318,6 +326,7 @@ if [ $SETUP_PKG -eq 1 ]; then
 	[ $SETUP_ZSH -eq 1 ] && PKGS+=("${TOOLS[@]}")
 	[ $SETUP_PYTHON -eq 1 ] && PKGS+=("${PYTHON[@]}")
 	[ $SETUP_VIM -eq 1 ] && PKGS+=("${VIM[@]}")
+	[ $SETUP_NEOVIM -eq 1 ] && PKGS+=("${NEOVIM[@]}")
 	[ $SETUP_I3 -eq 1 ] && {
 		PKGS+=("${I3[@]}")
 		AUR_PKGS+=("${I3_AUR[@]}")
@@ -332,7 +341,9 @@ if [ $SETUP_PKG -eq 1 ]; then
 
 	msg "Installing packages..."
 	sudo "${PKG_INSTALL[@]}" "${PKGS[@]}" 2>> "$LOG_FILE" || error "Errors occured during packages installation"
-	[ "${#AUR_PKGS}" -ne 0 ] && "${AUR_INSTALL[@]}" "${AUR_PKGS[@]}" 2>> "$LOG_FILE" || error "Errors occured during packages installation"
+	[ "${#AUR_PKGS}" -ne 0 ] && {
+		"${AUR_INSTALL[@]}" "${AUR_PKGS[@]}" 2>> "$LOG_FILE" || error "Errors occured during packages installation"
+	}
 fi
 
 msg "Cloning repositories..."
@@ -358,6 +369,7 @@ if [ -d "$CLONE_DIR/dotfiles"  ]; then
 		# Links in $HOME/.config
 		FIND_ARGS=("-maxdepth" "1" "-mindepth" "1" "-not" "-name" "*.example")
 		[ $SETUP_PYTHON -ne 1 ] && FIND_ARGS+=("-and" -"not" "-name" "bpython")
+		[ $SETUP_NEOVIM -ne 1 ] && FIND_ARGS+=("-and" -"not" "-name" "nvim")
 		[ $SETUP_I3 -ne 1 ] && {
 			I3_CONFIGS=("i3" "dunst" "rofi")
 			for c in "${I3_CONFIGS[@]}"; do

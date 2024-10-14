@@ -2,10 +2,10 @@
 export DEFAULT_USER="$USER"
 
 # Set default editor
-if [[ "$(uname -s)" == "Darwin" ]] && [[ -x /usr/local/bin/vim ]]; then
-	export EDITOR="/usr/local/bin/vim"
-elif [ -x /usr/bin/vim ]; then
-	export EDITOR="/usr/bin/vim"
+if [[ "$(uname -s)" == "Darwin" ]] && [[ -x /usr/local/bin/nvim ]]; then
+	export EDITOR="/usr/local/bin/nvim"
+elif [ -x /usr/bin/nvim ]; then
+	export EDITOR="/usr/bin/nvim"
 fi
 if [ -n "$EDITOR" ]; then
 	export VISUAL="$EDITOR"
