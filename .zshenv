@@ -1,16 +1,6 @@
 # Hide user from Oh my zsh prompt
 export DEFAULT_USER="$USER"
 
-# Set default editor
-if [[ "$(uname -s)" == "Darwin" ]] && [[ -x /usr/local/bin/nvim ]]; then
-	export EDITOR="/usr/local/bin/nvim"
-elif [ -x /usr/bin/nvim ]; then
-	export EDITOR="/usr/bin/nvim"
-fi
-if [ -n "$EDITOR" ]; then
-	export VISUAL="$EDITOR"
-fi
-
 if [ "$(uname -m)" = "Linux" ]; then
 	export VDPAU_DRIVER=va_gl
 fi
@@ -47,6 +37,14 @@ fi
 # krew
 if [ -d "${KREW_ROOT:-$HOME/.krew}" ]; then
 	export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+fi
+
+# Set default editor
+if [[ $commands[nvim] ]]; then
+	export EDITOR="nvim"
+fi
+if [ -n "$EDITOR" ]; then
+	export VISUAL="$EDITOR"
 fi
 
 export GPG_TTY="$(tty)"
