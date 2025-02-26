@@ -114,7 +114,8 @@ fi
 # kubectl completion
 if [[ $commands[kubectl] ]]; then
 	alias k=kubectl
-	source <(k completion zsh)
+	source <(kubectl completion zsh)
+	compdef k='kubectl'
 fi
 
 # flux
