@@ -12,6 +12,9 @@ __pycache__/
 .vim/bundle
 .vim/doc/tags
 
+# Neovim
+.config/nvim/plugin
+
 # Fontconfig
 .fonts/.uuid
 
