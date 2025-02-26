@@ -587,7 +587,7 @@ vim.g.python3_host_prog = '~/.virtualenvs/nvim/bin/python'
 
 -- Key mappings
 -- vim.keymap.set('n', '<F3>', ':set nonumber! colorcolumn=<CR> | :IndentBlanklineToggle<CR> | :lua Toggle_diagnostics()<CR> | :Gitsigns toggle_signs<CR>', {remap=false})
-vim.keymap.set('n', '<F3>', ':lua Toggle_gutters()<CR>', {remap=false})
+vim.keymap.set('n', '<F2>', ':lua Toggle_gutters()<CR>', {remap=false})
 vim.keymap.set('n', '<F4>', ':set hlsearch! hlsearch?<CR>', {remap=false})
 vim.keymap.set('n', '<F5>', ':nohlsearch<CR>', {remap=false})
 vim.keymap.set('n', '<F6>', ':let @/=\'\\<<C-R>=expand("<cword>")<CR>\\>\'<CR>:set hls<CR>', {remap=false})
