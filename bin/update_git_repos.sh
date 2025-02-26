@@ -1,4 +1,5 @@
 #! /usr/bin/env bash
+set -o pipefail
 
 COLORS="$(tput colors)"
 if (( COLORS >= 8 && COLORS < 256 )); then
@@ -40,7 +41,7 @@ while read -r directory; do
         (
         cd "$directory" || exit
         current_branch="$(git rev-parse --abbrev-ref HEAD)"
-        default_branch="$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
+        default_branch="$(git symbolic-ref refs/remotes/origin/HEAD 2> /dev/null | sed 's@^refs/remotes/origin/@@' || git remote show origin | grep "HEAD branch:" | sed -E 's/^[^:]+: (.*)/\1/')"
         if [ "$current_branch" != "$default_branch" ]; then
             if ! git checkout "$default_branch"; then
                 warning "Cannot switch to $default_branch, skipping..."
