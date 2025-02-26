@@ -18,6 +18,10 @@ disabled = true
 [git_branch]
 style = "bold green"
 
+[status]
+disabled = false
+format = '[$symbol ]($style) '
+
 [time]
 disabled = false
 utc_time_offset = "local"
