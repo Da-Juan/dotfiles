@@ -39,6 +39,12 @@ if [ -d "${KREW_ROOT:-$HOME/.krew}" ]; then
 	export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi
 
+# GOBIN
+export GOBIN="${GOPATH:-"$HOME/go"}/bin"
+if [ -d "${GOBIN}" ]; then
+	export PATH="${GOBIN}:$PATH"
+fi
+
 # Set default editor
 if [[ $commands[nvim] ]]; then
 	export EDITOR="nvim"
