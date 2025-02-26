@@ -26,6 +26,11 @@ export PATH="$HOME/.local/bin:$PATH"
 # Snap's bin
 export PATH="$PATH:/var/lib/snapd/snap/bin"
 
+# Homebrew's bin
+if [ -d /opt/homebrew/bin ]; then
+	export PATH="/opt/homebrew/bin:$PATH"
+fi
+
 # Cargo's bin
 if [ -d "$HOME/.cargo/bin" ]; then
 	export PATH="$HOME/.cargo/bin:$PATH"
