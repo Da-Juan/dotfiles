@@ -378,7 +378,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 require('mason').setup()
 
 -- Enable the following language servers
-local servers = { 'ansiblels', 'bashls', 'dockerls', 'gopls', 'html', 'jsonls', 'marksman', 'pyright', 'lua_ls', 'yamlls', 'rust_analyzer' }
+local servers = {'bashls', 'dockerls', 'gopls', 'html', 'jsonls', 'marksman', 'pyright', 'lua_ls', 'yamlls', 'terraformls' }
 
 -- Ensure the servers above are installed
 require('mason-lspconfig').setup {
