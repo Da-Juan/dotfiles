@@ -610,5 +610,9 @@ vim.filetype.add ({
   },
 })
 
+-- Do not add blank line at end of file if missing
+vim.o.fixendofline = false
+vim.g.editorconfig = false
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
