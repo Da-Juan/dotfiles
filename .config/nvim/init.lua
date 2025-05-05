@@ -614,5 +614,16 @@ vim.filetype.add ({
 vim.o.fixendofline = false
 vim.g.editorconfig = false
 
+vim.diagnostic.config(
+    {
+        underline = true,
+        virtual_text = {
+            spacing = 2,
+            -- prefix = "●",
+        },
+        update_in_insert = false,
+        severity_sort = true,
+    }
+)
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
